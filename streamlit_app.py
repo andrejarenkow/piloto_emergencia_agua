@@ -6,7 +6,7 @@ import json
 import requests
 #import geopandas as gpd
 
-pontos_captacao = pd.read_csv('https://arquivosdadosabertos.saude.gov.br/dados/sisagua/cadastro_pontos_captacao.zip', encoding='latin1', sep=';')
+pontos_captacao = pd.read_csv('pontos_captacao_rs_2024_com_lat_lon.csv')
 pontos_captacao
 
 pontos_captacao_rs_2024 = pontos_captacao[(pontos_captacao['UF'] == 'RS')& (pontos_captacao['Ano de referência'] == 2024)]
