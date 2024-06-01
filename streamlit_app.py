@@ -42,27 +42,7 @@ fig = px.scatter_mapbox(
     #color='Tipo da Forma de Abastecimento'
 )
 
-# Adicionando os polígonos dos municípios
-for feature in geojson_data['features']:
-    if feature['geometry']['type'] == 'Polygon':
-        coordinates = feature['geometry']['coordinates'][0]
-    elif feature['geometry']['type'] == 'MultiPolygon':
-        coordinates = feature['geometry']['coordinates'][0][0]
-    
-    lon = [point[0] for point in coordinates]
-    lat = [point[1] for point in coordinates]
-    
-    fig.add_trace(go.Scattermapbox(
-        fill='none',
-        hoverinfo ='skip',
-        lon=lon,
-        lat=lat,
-        line=dict(color='white'),
-        opacity=0.5,
-        mode='lines',
-        showlegend =False,
-        name=feature['properties']['NM_MUN']
-    ))
+
 
 # Configuração do mapa
 fig.update_layout(
