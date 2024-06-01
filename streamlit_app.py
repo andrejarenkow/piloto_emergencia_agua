@@ -78,7 +78,8 @@ with col2:
     fig.update_layout(
         mapbox_style="dark",
         mapbox_zoom=6,
-        mapbox_center={"lat": -29.5, "lon": -53.5}
+        mapbox_center={"lat": (df['Latitude_corrigida'].max()+df['Latitude_corrigida'].min())/2,
+                       "lon": (df['Longitude_corrigida'].max()+df['Longitude_corrigida'].min())/2}
     )
     
     st.plotly_chart(fig)
