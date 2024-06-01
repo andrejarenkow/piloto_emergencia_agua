@@ -77,9 +77,9 @@ with col2:
     # Configuração do mapa
     fig.update_layout(
         mapbox_style="carto-darkmatter",
-        #mapbox_zoom=6,
-        #mapbox_center={"lat": (df['Latitude_corrigida'].max()+df['Latitude_corrigida'].min())/2,
-        #               "lon": (df['Longitude_corrigida'].max()+df['Longitude_corrigida'].min())/2}
+        mapbox_zoom=6,
+        mapbox_center={"lat": (df['Latitude_corrigida'].max()+df['Latitude_corrigida'].min())/2,
+                       "lon": (df['Longitude_corrigida'].max()+df['Longitude_corrigida'].min())/2}
     )
     
     st.plotly_chart(fig)
