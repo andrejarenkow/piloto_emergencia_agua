@@ -1,10 +1,10 @@
 import streamlit as st
 import plotly.express as px
-#import plotly.graph_objects as go
+import plotly.graph_objects as go
 import pandas as pd
 import json
 import requests
-#import geopandas as gpd
+import geopandas as gpd
 
 pontos_captacao = pd.read_csv('pontos_captacao_rs_2024_com_lat_lon.csv')
 #pontos_captacao
