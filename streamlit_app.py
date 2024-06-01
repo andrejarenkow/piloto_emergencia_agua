@@ -6,13 +6,26 @@ import json
 import requests
 import geopandas as gpd
 
-pontos_captacao = pd.read_csv('pontos_captacao_rs_2024_com_lat_lon.csv')
-#pontos_captacao
+st.set_page_config(
+    page_title="Vigiagua Emergência",
+    page_icon="🌍",
+    layout="wide",
+    initial_sidebar_state='collapsed')
 
-pontos_captacao_rs_2024 = pontos_captacao[(pontos_captacao['UF'] == 'RS')& (pontos_captacao['Ano de referência'] == 2024)]
-pontos_captacao_rs_2024_com_lat_lon = pontos_captacao_rs_2024.dropna(subset=['Latitude', 'Longitude']).reset_index(drop=True)
-pontos_captacao_rs_2024_com_lat_lon['Latitude_corrigida'] = pd.to_numeric(pontos_captacao_rs_2024_com_lat_lon['Latitude'].str.replace(',','.'), errors='coerce')
-pontos_captacao_rs_2024_com_lat_lon['Longitude_corrigida'] = pd.to_numeric(pontos_captacao_rs_2024_com_lat_lon['Longitude'].str.replace(',','.'), errors='coerce')
+# Lê os dados de um arquivo Excel online
+@st.cache_data
+def read_dados():
+    dados_function = pd.read_csv('pontos_captacao_rs_2024_com_lat_lon.csv')
+    
+    return dados_function
+
+pontos_captacao_rs_2024_com_lat_lon = read_dados()
+crs = st.selectbox('COORDENADORIA REGIONAL DE SAÚDE', options=sorted(dados['Regional de Saúde'].unique()), index=None, placeholder='Selecione uma CRS', key='crs')
+        
+# Cria um seletor para escolher o município com base na Regional de Saúde selecionada
+municipio = st.selectbox('MUNICÍPIO', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município', key='municipio')
+       
+
 
 #pontos_captacao_rs_2024_com_lat_lon
 
