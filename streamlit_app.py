@@ -8,7 +8,7 @@ import geopandas as gpd
 
 st.set_page_config(
     page_title="Vigiagua Emergência",
-    page_icon="🌍",
+    page_icon=":potable_water:",
     layout="wide",
     initial_sidebar_state='collapsed')
 
