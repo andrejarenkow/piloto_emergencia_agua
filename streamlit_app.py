@@ -26,7 +26,11 @@ crs = st.selectbox('COORDENADORIA REGIONAL DE SAÚDE', options=sorted(dados['Reg
 #municipio = st.selectbox('MUNICÍPIO', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município', key='municipio')
        
 # Criação do DataFrame
-df = dados[dados['Regional de Saúde']==crs].reset_index(drop=True)
+if crs != None:
+    df = dados[dados['Regional de Saúde']==crs].reset_index(drop=True)
+
+else:
+    df = dados.copy()
 
 #pontos_captacao_rs_2024_com_lat_lon
 
