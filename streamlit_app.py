@@ -22,14 +22,15 @@ def read_dados():
 dados = read_dados()
 col1, col2 = st.columns([1,2])
 with col1:
-    crs = st.selectbox('COORDENADORIA REGIONAL DE SAÚDE', options=sorted(dados['Regional de Saúde'].unique()), index=None, placeholder='Selecione uma CRS', key='crs')
+    crs = st.selectbox('Coordenadoria Regional de Saúde', options=sorted(dados['Regional de Saúde'].unique()), index=None, placeholder='Selecione uma CRS', key='crs')
+    tipo_forma_abastecimento = st.multiselect('Tipo da forma de abastecimento', options = ['SAA','SAC','SAI'], default=['SAA','SAC','SAI'])
         
     # Cria um seletor para escolher o município com base na Regional de Saúde selecionada
     #municipio = st.selectbox('MUNICÍPIO', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município', key='municipio')
            
     # Criação do DataFrame
     if crs != None:
-        df = dados[dados['Regional de Saúde']==crs].reset_index(drop=True)
+        df = dados[(dados['Regional de Saúde']==crs)&(dados['Tipo da Forma de Abastecimento'].isin(tipo_forma_abastecimento))].reset_index(drop=True)
     
     else:
         df = dados.copy()
