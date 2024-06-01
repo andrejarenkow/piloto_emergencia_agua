@@ -58,7 +58,7 @@ with col2:
         height=800,
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
-        title = 'Formas de abastecimento com geolocalização'
+        title = 'Formas de abastecimento com geolocalização',
         color='Tipo da Forma de Abastecimento'
     )
     
