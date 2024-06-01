@@ -29,7 +29,7 @@ def read_dados():
 
 dados = read_dados()
 col1, col2 = st.columns([1,2])
-filtros_container = st.container()
+filtros_container = st.container(border=True)
 with filtros_container:
     with col1:
         crs = st.multiselect('Coordenadoria Regional de Saúde', options=sorted(dados['Regional de Saúde'].unique()), default=sorted(dados['Regional de Saúde'].unique()), placeholder='Selecione uma CRS', key='crs')
