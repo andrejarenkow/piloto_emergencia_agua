@@ -41,7 +41,7 @@ fig = px.scatter_mapbox(
     hover_data=['Município', 'Nome da Instiuição'], 
     #color='Tipo da Forma de Abastecimento'
 )
-"""
+
 # Adicionando os polígonos dos municípios
 for feature in geojson_data['features']:
     if feature['geometry']['type'] == 'Polygon':
@@ -63,7 +63,7 @@ for feature in geojson_data['features']:
         showlegend =False,
         name=feature['properties']['NM_MUN']
     ))
-"""
+
 # Configuração do mapa
 fig.update_layout(
     mapbox_style="dark",
