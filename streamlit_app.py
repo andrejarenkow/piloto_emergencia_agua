@@ -19,13 +19,14 @@ def read_dados():
     
     return dados_function
 
-pontos_captacao_rs_2024_com_lat_lon = read_dados()
+dados = read_dados()
 crs = st.selectbox('COORDENADORIA REGIONAL DE SAÚDE', options=sorted(dados['Regional de Saúde'].unique()), index=None, placeholder='Selecione uma CRS', key='crs')
         
 # Cria um seletor para escolher o município com base na Regional de Saúde selecionada
-municipio = st.selectbox('MUNICÍPIO', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município', key='municipio')
+#municipio = st.selectbox('MUNICÍPIO', options=sorted(dados[dados['Regional de Saúde']==crs]['Município'].unique()), index=None, placeholder='Selecione uma município', key='municipio')
        
-
+# Criação do DataFrame
+df = dados[dados['Regional de Saúde']==crs].reset_index(drop=True)
 
 #pontos_captacao_rs_2024_com_lat_lon
 
@@ -41,8 +42,7 @@ geojson_data = response.json()
 token = 'pk.eyJ1IjoiYW5kcmUtamFyZW5rb3ciLCJhIjoiY2xkdzZ2eDdxMDRmMzN1bnV6MnlpNnNweSJ9.4_9fi6bcTxgy5mGaTmE4Pw'
 px.set_mapbox_access_token(token)
 
-# Criação do DataFrame
-df = pontos_captacao_rs_2024_com_lat_lon.copy()
+
 
 # Criação do mapa com os pontos
 fig = px.scatter_mapbox(
