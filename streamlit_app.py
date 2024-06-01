@@ -25,6 +25,14 @@ def read_dados():
     # Aplicar a função à coluna 'Regional de Saúde'
     dados_function['Regional de Saúde'] = dados_function['Regional de Saúde'].apply(pad_zero)
 
+    # Função para converter valores para negativos
+    def to_negative(value):
+        return -abs(value)
+    
+    # Aplicar a função à coluna 'Valores'
+    dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(to_negative)
+    dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(to_negative)
+
     return dados_function
 
 dados = read_dados()
