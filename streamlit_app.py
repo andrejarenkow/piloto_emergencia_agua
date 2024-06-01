@@ -65,7 +65,7 @@ with col2:
         df, 
         lat='Latitude_corrigida', 
         lon='Longitude_corrigida', 
-        height=500,
+        height=600,
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
         title = 'Formas de abastecimento com geolocalização',
