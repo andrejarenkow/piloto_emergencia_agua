@@ -7,16 +7,14 @@ import requests
 #import geopandas as gpd
 
 pontos_captacao = pd.read_csv('pontos_captacao_rs_2024_com_lat_lon.csv')
-pontos_captacao
+#pontos_captacao
 
 pontos_captacao_rs_2024 = pontos_captacao[(pontos_captacao['UF'] == 'RS')& (pontos_captacao['Ano de referência'] == 2024)]
 pontos_captacao_rs_2024_com_lat_lon = pontos_captacao_rs_2024.dropna(subset=['Latitude', 'Longitude']).reset_index(drop=True)
 pontos_captacao_rs_2024_com_lat_lon['Latitude_corrigida'] = pd.to_numeric(pontos_captacao_rs_2024_com_lat_lon['Latitude'].str.replace(',','.'), errors='coerce')
 pontos_captacao_rs_2024_com_lat_lon['Longitude_corrigida'] = pd.to_numeric(pontos_captacao_rs_2024_com_lat_lon['Longitude'].str.replace(',','.'), errors='coerce')
 
-pontos_captacao_rs_2024_com_lat_lon
-
-
+#pontos_captacao_rs_2024_com_lat_lon
 
 # URL do arquivo GeoJSON
 url = 'https://github.com/andrejarenkow/geodata/raw/main/municipios_rs_CRS/RS_Municipios_2021.json'
