@@ -16,7 +16,15 @@ st.set_page_config(
 @st.cache_data
 def read_dados():
     dados_function = pd.read_csv('pontos_captacao_rs_2024_com_lat_lon.csv')
-    
+    # Função para adicionar '0' se o comprimento for menor que 7
+    def pad_zero(value):
+        if len(value) < 7:
+            return value.zfill(7)
+        return value
+
+    # Aplicar a função à coluna 'Regional de Saúde'
+    dados_function['Regional de Saúde'] = dados_function['Regional de Saúde'].apply(pad_zero)
+
     return dados_function
 
 dados = read_dados()
