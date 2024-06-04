@@ -65,6 +65,14 @@ with col2:
     # Configurar o token do Mapbox
     token = 'pk.eyJ1IjoiYW5kcmUtamFyZW5rb3ciLCJhIjoiY2xkdzZ2eDdxMDRmMzN1bnV6MnlpNnNweSJ9.4_9fi6bcTxgy5mGaTmE4Pw'
     px.set_mapbox_access_token(token)
+
+    # Definir um mapa de cores discreto personalizado
+    color_discrete_map = {
+        'SAA': '#BB86FC',
+        'SAC': '#02DAC5',
+        'SAI': '#CF667A',
+        # Adicione mais categorias e cores conforme necessário
+    }
     
     
     
@@ -79,7 +87,9 @@ with col2:
         height=800,
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
-        color='Tipo da Forma de Abastecimento'
+        color='Tipo da Forma de Abastecimento',
+        color_discrete_map=color_discrete_map 
+        
     )
     
     # Configuração do mapa
