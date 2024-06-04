@@ -93,7 +93,7 @@ with col2:
                 'sourcetype': 'raster',
                 'source': [raster_url],
                 'below': 'traces',
-                'opacity': 0.5  # Define a opacidade da camada raster
+                'opacity': 1  # Define a opacidade da camada raster
             }
         ]
     )
