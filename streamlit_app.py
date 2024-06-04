@@ -87,7 +87,7 @@ with col2:
         height=800,
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
-        color='Tipo da Forma de Abastecimento',
+        #color='Tipo da Forma de Abastecimento',
         color_discrete_map=color_discrete_map 
         
     )
