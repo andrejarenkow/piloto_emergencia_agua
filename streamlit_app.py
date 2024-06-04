@@ -76,7 +76,7 @@ with col2:
         df, 
         lat='Latitude_corrigida', 
         lon='Longitude_corrigida', 
-        height=600,
+        height=800,
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
         color='Tipo da Forma de Abastecimento'
