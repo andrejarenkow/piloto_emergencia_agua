@@ -68,6 +68,9 @@ with col2:
     
     
     
+    # URL do raster do Google Earth Engine
+    raster_url = 'https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/96bb4b396c3f558be1dca749f38fc520-28b3e69b7b9742b50e651234a75706cc/tiles/{z}/{x}/{y}'
+    
     # Criação do mapa com os pontos
     fig = px.scatter_mapbox(
         df, 
@@ -76,18 +79,23 @@ with col2:
         height=600,
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
-        #title = 'Formas de abastecimento com geolocalização',
         color='Tipo da Forma de Abastecimento'
     )
-    
-    
     
     # Configuração do mapa
     fig.update_layout(
         mapbox_style="carto-darkmatter",
         mapbox_zoom=6,
-        mapbox_center={"lat": (df['Latitude_corrigida'].max()+df['Latitude_corrigida'].min())/2,
-                       "lon": (df['Longitude_corrigida'].max()+df['Longitude_corrigida'].min())/2}
+        mapbox_center={"lat": (df['Latitude_corrigida'].max() + df['Latitude_corrigida'].min()) / 2,
+                       "lon": (df['Longitude_corrigida'].max() + df['Longitude_corrigida'].min()) / 2},
+        mapbox_layers=[
+            {
+                'sourcetype': 'raster',
+                'source': [raster_url],
+                'below': 'traces',
+                'opacity': 0.5  # Define a opacidade da camada raster
+            }
+        ]
     )
     
     st.plotly_chart(fig)
