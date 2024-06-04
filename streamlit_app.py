@@ -68,7 +68,7 @@ with col2:
 
     # Definir um mapa de cores discreto personalizado
     color_discrete_map = {
-        'SAA': '#BB86FC',
+        'SAA': '#DEF169',
         'SAC': '#02DAC5',
         'SAI': '#CF667A',
         # Adicione mais categorias e cores conforme necessário
