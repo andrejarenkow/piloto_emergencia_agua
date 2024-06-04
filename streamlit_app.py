@@ -88,7 +88,7 @@ with col2:
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
         #color='Tipo da Forma de Abastecimento',
-        color_discrete_sequence='#FFCB00'
+        color_discrete_sequence=['#FFCB00']
         
     )
     
