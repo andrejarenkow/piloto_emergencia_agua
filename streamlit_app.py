@@ -113,6 +113,10 @@ with col2:
     geojson_url = 'RS_Municipios_2021 (4).json'  # Substitua pelo caminho para o seu arquivo GeoJSON
     with open(geojson_url) as f:
         geojson_data = json.load(f)
+
+    geojson_url = 'mapbiomas-brazil-collection-80-area.geojson'  # Substitua pelo caminho para o seu arquivo GeoJSON
+    with open(geojson_url) as f:
+        geojson_data_indigena = json.load(f)
     
     fig.update_layout(
         mapbox_style=mapa_base,
@@ -131,6 +135,15 @@ with col2:
                     'source': geojson_data,
                     'type': 'line',  # Tipo de camada (fill, line, symbol)
                     'color': cor_municipios,  # Cor da camada GeoJSON
+                    'below': 'traces',
+                    'line': {'width':1},
+                    'opacity':0.5
+                },
+                        {
+                    'sourcetype': 'geojson',
+                    'source': geojson_data_indigena,
+                    'type': 'fill',  # Tipo de camada (fill, line, symbol)
+                    'color': 'red',  # Cor da camada GeoJSON
                     'below': 'traces',
                     'line': {'width':1},
                     'opacity':0.5
