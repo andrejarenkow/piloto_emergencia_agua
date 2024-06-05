@@ -132,7 +132,7 @@ with col2:
                     'type': 'line',  # Tipo de camada (fill, line, symbol)
                     'color': cor_municipios,  # Cor da camada GeoJSON
                     'below': 'traces',
-                    'line-width': 3,
+                    'line': {'width':8},
                     'opacity':0.5
                 },
         ]
