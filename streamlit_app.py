@@ -119,5 +119,33 @@ with col2:
             }
         ]
     )
+
+    # Carregar o arquivo GeoJSON
+    geojson_url = 'https://raw.githubusercontent.com/andrejarenkow/geodata/main/municipios_rs_CRS/RS_Municipios_2021.json'  # Substitua pelo caminho para o seu arquivo GeoJSON
+    with open(geojson_url) as f:
+        geojson_data = json.load(f)
+    
+    # Adicionar o GeoJSON ao mapa
+    fig.update_layout(
+        mapbox={
+            'style': "carto-darkmatter",
+            'layers': [
+                {
+                    'sourcetype': 'geojson',
+                    'source': geojson_data,
+                    'type': 'fill',  # Tipo de camada (fill, line, symbol)
+                    'color': 'rgba(0, 255, 0, 0.5)',  # Cor da camada GeoJSON
+                    'below': 'traces'
+                },
+                {
+                    'sourcetype': 'raster',
+                    'source': [raster_url],
+                    'opacity': 0.5,
+                    'below': 'traces'
+                }
+            ]
+        }
+    )
+    
     
     st.plotly_chart(fig)
