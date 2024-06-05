@@ -108,35 +108,25 @@ with col2:
     )
     
     # Configuração do mapa
-    #fig.update_layout(
-    #    mapbox_style=mapa_base,
-    #    mapbox_zoom=5.5,
-    #    mapbox_center={"lat": (df['Latitude_corrigida'].max() + df['Latitude_corrigida'].min()) / 2,
-    #                   "lon": (df['Longitude_corrigida'].max() + df['Longitude_corrigida'].min()) / 2},
-    #    mapbox_layers=[
-    #        {
-    #            'sourcetype': 'raster',
-    #            'source': [raster_url],
-    #            'below': 'traces',
-    #            'opacity': transparencia_raster  # Define a opacidade da camada raster
-    #        }
-    #    ]
-    #)
 
     # Carregar o arquivo GeoJSON
     geojson_url = 'RS_Municipios_2021 (4).json'  # Substitua pelo caminho para o seu arquivo GeoJSON
     with open(geojson_url) as f:
         geojson_data = json.load(f)
     
-    # Adicionar o GeoJSON ao mapa
     fig.update_layout(
-        mapbox={
-            'style': mapa_base,
-            'mapbox_zoom':5.5,
-            'mapbox_center':{"lat": (df['Latitude_corrigida'].max() + df['Latitude_corrigida'].min()) / 2,
+        mapbox_style=mapa_base,
+        mapbox_zoom=5.5,
+        mapbox_center={"lat": (df['Latitude_corrigida'].max() + df['Latitude_corrigida'].min()) / 2,
                        "lon": (df['Longitude_corrigida'].max() + df['Longitude_corrigida'].min()) / 2},
-            'layers': [
-                {
+        mapbox_layers=[
+            {
+                'sourcetype': 'raster',
+                'source': [raster_url],
+                'below': 'traces',
+                'opacity': transparencia_raster  # Define a opacidade da camada raster
+            },
+    {
                     'sourcetype': 'geojson',
                     'source': geojson_data,
                     'type': 'fill',  # Tipo de camada (fill, line, symbol)
@@ -149,9 +139,10 @@ with col2:
                     'opacity': 1,
                     'below': 'traces'
                 }
-            ]
-        }
+        ]
     )
+
+
     
     
     st.plotly_chart(fig)
