@@ -36,6 +36,7 @@ def read_dados():
     return dados_function
 
 dados = read_dados()
+st.subtitle('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 col1, col2 = st.columns([1,2])
 filtros_container = st.container(border=True)
 with filtros_container:
