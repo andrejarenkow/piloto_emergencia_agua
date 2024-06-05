@@ -121,7 +121,7 @@ with col2:
     )
 
     # Carregar o arquivo GeoJSON
-    geojson_url = 'https://raw.githubusercontent.com/andrejarenkow/geodata/main/municipios_rs_CRS/RS_Municipios_2021.json'  # Substitua pelo caminho para o seu arquivo GeoJSON
+    geojson_url = 'RS_Municipios_2021 (4).json'  # Substitua pelo caminho para o seu arquivo GeoJSON
     with open(geojson_url) as f:
         geojson_data = json.load(f)
     
