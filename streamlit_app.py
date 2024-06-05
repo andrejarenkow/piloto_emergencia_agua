@@ -128,7 +128,7 @@ with col2:
     # Adicionar o GeoJSON ao mapa
     fig.update_layout(
         mapbox={
-            'style': "carto-darkmatter",
+            'style': mapa_base,
             'layers': [
                 {
                     'sourcetype': 'geojson',
