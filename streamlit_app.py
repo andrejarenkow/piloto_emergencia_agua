@@ -139,14 +139,14 @@ with col2:
                     'line': {'width':1},
                     'opacity':0.5
                 },
-                        {
+             {
                     'sourcetype': 'geojson',
                     'source': geojson_data_indigena,
                     'type': 'fill',  # Tipo de camada (fill, line, symbol)
                     'color': 'red',  # Cor da camada GeoJSON
                     'below': 'traces',
                     'line': {'width':1},
-                    'opacity':0.5
+                    'opacity':1
                 },
         ]
     )
