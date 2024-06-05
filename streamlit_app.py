@@ -39,6 +39,11 @@ dados = read_dados()
 st.subheader('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 col1, col2 = st.columns([1,2])
 filtros_container = st.container(border=True)
+    # URL do raster do Google Earth Engine
+raster_url = 'https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/96bb4b396c3f558be1dca749f38fc520-28b3e69b7b9742b50e651234a75706cc/tiles/{z}/{x}/{y}'
+raster_url_uso_solo = 'https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/3511bd8ab7783ca38671e6fefbac6ba5-59a31765405c004d57b9f752ac3336a2/tiles/{z}/{x}/{y}'
+
+ 
 with filtros_container:
     with col1:
         crs = st.multiselect('Coordenadoria Regional de Saúde', options=sorted(dados['Regional de Saúde'].unique()), default=sorted(dados['Regional de Saúde'].unique()), placeholder='Selecione uma CRS', key='crs')
@@ -65,6 +70,9 @@ with filtros_container:
         # Cor das linhas
         cor_municipios = st.selectbox('Selecione a cor das linhas', options = ['white','black'])
 
+        # Cor das linhas
+        selecao_raster = st.selectbox('Selecione o raster', options = [raster_url,raster_url_uso_solo])
+
 with col2:
     # URL do arquivo GeoJSON
     url = 'https://github.com/andrejarenkow/geodata/raw/main/municipios_rs_CRS/RS_Municipios_2021.json'
@@ -88,11 +96,7 @@ with col2:
     
     
     
-    # URL do raster do Google Earth Engine
-    raster_url = 'https://earthengine.googleapis.com/v1/projects/earthengine-legacy/maps/96bb4b396c3f558be1dca749f38fc520-28b3e69b7b9742b50e651234a75706cc/tiles/{z}/{x}/{y}'
-
-
-    
+   
     # Criação do mapa com os pontos
     fig = px.scatter_mapbox(
         df, 
@@ -132,7 +136,7 @@ with col2:
             },
             {
                     'sourcetype': 'geojson',
-                    'source': geojson_data_indigena,
+                    'source': geojson_data,
                     'type': 'line',  # Tipo de camada (fill, line, symbol)
                     'color': cor_municipios,  # Cor da camada GeoJSON
                     'below': 'traces',
