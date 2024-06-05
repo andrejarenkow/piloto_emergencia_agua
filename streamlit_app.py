@@ -59,8 +59,8 @@ with filtros_container:
                                                                      "basic", "streets", "outdoors", "light", "dark", "satellite",
                                                                      "satellite-streets" ])
         # Transparências
-        transparencia_raster = st.slider('Transparência da mancha de inundação', min_value=0, max_value=1, value=0.8)
-        transparencia_pontos = st.slider('Transparência dos pontos', min_value=0, max_value=1, value=0.8)
+        transparencia_raster = st.slider('Transparência da mancha de inundação', value=0.8)
+        transparencia_pontos = st.slider('Transparência dos pontos', value=0.8)
 
 with col2:
     # URL do arquivo GeoJSON
