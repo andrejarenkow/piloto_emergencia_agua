@@ -62,6 +62,9 @@ with filtros_container:
         transparencia_raster = st.slider('Transparência da mancha de inundação', value=0.8)
         transparencia_pontos = st.slider('Transparência dos pontos', value=0.8)
 
+        # Cor das linhas
+        cor_municipios = st.selectbox('Selecione a cor das linhas', options = ['white','black'])
+
 with col2:
     # URL do arquivo GeoJSON
     url = 'https://github.com/andrejarenkow/geodata/raw/main/municipios_rs_CRS/RS_Municipios_2021.json'
@@ -134,13 +137,13 @@ with col2:
                     'sourcetype': 'geojson',
                     'source': geojson_data,
                     'type': 'fill',  # Tipo de camada (fill, line, symbol)
-                    'color': 'rgba(0, 255, 0, 0.5)',  # Cor da camada GeoJSON
+                    'color': cor_municipios,  # Cor da camada GeoJSON
                     'below': 'traces'
                 },
                 {
                     'sourcetype': 'raster',
                     'source': [raster_url],
-                    'opacity': 0.5,
+                    'opacity': 1,
                     'below': 'traces'
                 }
             ]
