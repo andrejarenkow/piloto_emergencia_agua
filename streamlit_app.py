@@ -132,7 +132,7 @@ with col2:
             },
             {
                     'sourcetype': 'geojson',
-                    'source': geojson_data,
+                    'source': geojson_data_indigena,
                     'type': 'line',  # Tipo de camada (fill, line, symbol)
                     'color': cor_municipios,  # Cor da camada GeoJSON
                     'below': 'traces',
