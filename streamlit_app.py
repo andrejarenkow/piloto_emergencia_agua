@@ -130,7 +130,7 @@ with col2:
         mapbox_layers=[
             {
                 'sourcetype': 'raster',
-                'source': [raster_url],
+                'source': [selecao_raster],
                 'below': 'traces',
                 'opacity': transparencia_raster  # Define a opacidade da camada raster
             },
