@@ -57,7 +57,11 @@ with filtros_container:
         # Seleção mapa base
         mapa_base = st.selectbox('Selecione o mapa base', options = ["open-street-map", "carto-positron", "carto-darkmatter",
                                                                      "basic", "streets", "outdoors", "light", "dark", "satellite",
-                                                                     "satellite-streets" ]
+                                                                     "satellite-streets" ])
+        # Transparências
+        transparencia_raster = st.slider('Transparência da mancha de inundação', min_value=0, max_value=1, value=0.8)
+        transparencia_pontos = st.slider('Transparência dos pontos', min_value=0, max_value=1, value=0.8)
+
 with col2:
     # URL do arquivo GeoJSON
     url = 'https://github.com/andrejarenkow/geodata/raw/main/municipios_rs_CRS/RS_Municipios_2021.json'
@@ -96,7 +100,7 @@ with col2:
         hover_data=['Município', 'Nome da Instiuição'], 
         #color='Tipo da Forma de Abastecimento',
         color_discrete_sequence=['#FF4B4B'],
-        opacity=0.5
+        opacity=transparencia_pontos
         
     )
     
@@ -111,7 +115,7 @@ with col2:
                 'sourcetype': 'raster',
                 'source': [raster_url],
                 'below': 'traces',
-                'opacity': 1  # Define a opacidade da camada raster
+                'opacity': transparencia_raster  # Define a opacidade da camada raster
             }
         ]
     )
