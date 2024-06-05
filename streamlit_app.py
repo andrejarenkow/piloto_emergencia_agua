@@ -126,19 +126,13 @@ with col2:
                 'below': 'traces',
                 'opacity': transparencia_raster  # Define a opacidade da camada raster
             },
-    {
+            {
                     'sourcetype': 'geojson',
                     'source': geojson_data,
                     'type': 'fill',  # Tipo de camada (fill, line, symbol)
                     'color': cor_municipios,  # Cor da camada GeoJSON
                     'below': 'traces'
                 },
-                {
-                    'sourcetype': 'raster',
-                    'source': [raster_url],
-                    'opacity': 1,
-                    'below': 'traces'
-                }
         ]
     )
 
