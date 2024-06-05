@@ -129,7 +129,7 @@ with col2:
             {
                     'sourcetype': 'geojson',
                     'source': geojson_data,
-                    'type': 'fill',  # Tipo de camada (fill, line, symbol)
+                    'type': 'line',  # Tipo de camada (fill, line, symbol)
                     'color': cor_municipios,  # Cor da camada GeoJSON
                     'below': 'traces'
                 },
