@@ -73,6 +73,10 @@ with filtros_container:
         # Cor das linhas
         selecao_raster = st.selectbox('Selecione o raster', options = [raster_url,raster_url_uso_solo])
 
+        # Cor dos pontos
+        cor_superficial = st.colorpicker('Cor da captação SUPERFICIAL','#FF4B4B')
+        cor_subterraneo = st.colorpicker('Cor da captação SUBTERRANEO','#ffcb00')
+
 with col2:
     # URL do arquivo GeoJSON
     url = 'https://github.com/andrejarenkow/geodata/raw/main/municipios_rs_CRS/RS_Municipios_2021.json'
@@ -106,7 +110,7 @@ with col2:
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município','Tipo de captação', 'Nome da Instiuição',], 
         color='Tipo de captação',
-        color_discrete_sequence=['#FF4B4B','#ffcb00'],
+        color_discrete_sequence=[cor_superficial,cor_subterraneo],
         opacity=transparencia_pontos
         
     )
