@@ -74,8 +74,8 @@ with filtros_container:
         selecao_raster = st.selectbox('Selecione o raster', options = [raster_url,raster_url_uso_solo])
 
         # Cor dos pontos
-        cor_superficial = st.colorpicker('Cor da captação SUPERFICIAL','#FF4B4B')
-        cor_subterraneo = st.colorpicker('Cor da captação SUBTERRANEO','#ffcb00')
+        cor_superficial = st.color_picker('Cor da captação SUPERFICIAL','#FF4B4B')
+        cor_subterraneo = st.color_picker('Cor da captação SUBTERRANEO','#ffcb00')
 
 with col2:
     # URL do arquivo GeoJSON
