@@ -71,7 +71,7 @@ with filtros_container:
         cor_municipios = st.selectbox('Selecione a cor das linhas', options = ['black','white'])
 
         # Cor das linhas
-        selecao_raster = st.selectbox('Selecione o raster', options = [raster_url,raster_url_uso_solo])
+        #selecao_raster = st.selectbox('Selecione o raster', options = [raster_url,raster_url_uso_solo])
 
         # Cor dos pontos
         cor_superficial = st.color_picker('Cor da captação SUPERFICIAL','#FF4B4B')
