@@ -106,7 +106,7 @@ with col2:
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município','Tipo de captação', 'Nome da Instiuição',], 
         color='Tipo de captação',
-        color_discrete_sequence=['#FF4B4B'],
+        #color_discrete_sequence=['#FF4B4B'],
         opacity=transparencia_pontos
         
     )
