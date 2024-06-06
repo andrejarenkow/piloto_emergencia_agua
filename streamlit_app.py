@@ -104,7 +104,7 @@ with col2:
         lon='Longitude_corrigida', 
         height=800,
         hover_name='Nome da Forma de Abastecimento', 
-        hover_data=['Município', 'Nome da Instiuição'], 
+        hover_data=['Município','Tipo de captação', 'Nome da Instiuição',], 
         color='Tipo de captação',
         color_discrete_sequence=['#FF4B4B'],
         opacity=transparencia_pontos
