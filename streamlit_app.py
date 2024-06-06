@@ -68,7 +68,7 @@ with filtros_container:
         transparencia_pontos = st.slider('Transparência dos pontos', value=0.8)
 
         # Cor das linhas
-        cor_municipios = st.selectbox('Selecione a cor das linhas', options = ['white','black'])
+        cor_municipios = st.selectbox('Selecione a cor das linhas', options = ['black','white'])
 
         # Cor das linhas
         selecao_raster = st.selectbox('Selecione o raster', options = [raster_url,raster_url_uso_solo])
