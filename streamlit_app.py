@@ -105,7 +105,7 @@ with col2:
         height=800,
         hover_name='Nome da Forma de Abastecimento', 
         hover_data=['Município', 'Nome da Instiuição'], 
-        #color='Tipo da Forma de Abastecimento',
+        color='Tipo de captação',
         color_discrete_sequence=['#FF4B4B'],
         opacity=transparencia_pontos
         
