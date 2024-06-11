@@ -5,6 +5,7 @@ import pandas as pd
 import json
 import requests
 import geopandas as gpd
+import math
 
 st.set_page_config(
     page_title="Vigiagua Emergência",
