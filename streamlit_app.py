@@ -25,13 +25,26 @@ def read_dados():
     # Aplicar a função à coluna 'Regional de Saúde'
     dados_function['Regional de Saúde'] = dados_function['Regional de Saúde'].apply(pad_zero)
 
-    # Função para converter valores para negativos
-    def to_negative(value):
-        return -abs(value)
+
+        # Função para corrigir coordenadas
+    def corrigir_coordenada(numero):
+        # Certifique-se de que o número é positivo para manipulação
+        numero_transformado = abs(numero)
+        
+        # Obtenha o logaritmo de base 10 do número transformado
+        log_base10 = math.log10(numero_transformado)
+        
+        # Arredonde o logaritmo para baixo e subtraia 1 para obter a posição correta da vírgula
+        log_arredondado = math.floor(log_base10) - 1
+        
+        # Divida o número pela potência de 10 correspondente
+        numero_consertado = -1 * numero_transformado / (10 ** log_arredondado)
+        
+        return numero_consertado
     
     # Aplicar a função à coluna 'Valores'
-    dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(to_negative)
-    dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(to_negative)
+    dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(corrigir_coordenada)
+    dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(corrigir_coordenada)
 
     return dados_function
 
