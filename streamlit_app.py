@@ -74,7 +74,7 @@ filtros_container = st.container(border=True)
 
 with col1:
     municipios_afetados = pd.pivot_table(gdf_pontos, index='Município', columns=['Distância','Tipo de ca'], values='geometry', aggfunc='count').fillna(0).astype(int)#.sort_values('Dentro - Alagado', ascending=False)
-    st.data_frame(municipios_afetados)
+    st.dataframe(municipios_afetados)
 
 # Definir o centro do mapa
 centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
