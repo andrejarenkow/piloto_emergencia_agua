@@ -78,14 +78,23 @@ centro_mapa = [-32, -51]  # substitua pela latitude e longitude do centro do seu
 # Criar o mapa
 mapa = folium.Map(location=centro_mapa, zoom_start=5.5)
 
-# Função para obter o ícone baseado na coluna 'Distância'
-def get_icon(distancia):
-    if distancia == 'Dentro - Alagado':
-        return folium.Icon(color='red', icon='info-sign')
-    elif distancia == '100 metros':
-        return folium.Icon(color='orange', icon='info-sign')
+# Função para obter o ícone baseado na coluna 'Distância' e 'Tipo de ca'
+def get_icon(distancia, tipo_de_ca):
+    if tipo_de_ca == 'SUBTERRANEO':
+        icon = 'tint'  # exemplo de ícone para subterrâneo
+    elif tipo_de_ca == 'SUPERFICIAL':
+        icon = 'cloud'  # exemplo de ícone para superficial
     else:
-        return folium.Icon(color='gray', icon='info-sign')  # ícone padrão se o valor não for encontrado
+        icon = 'info-sign'  # ícone padrão se o valor não for encontrado
+    
+    if distancia == 'Dentro - Alagado':
+        color = 'red'
+    elif distancia == '100 metros':
+        color = 'orange'
+    else:
+        color = 'gray'  # cor padrão se o valor não for encontrado
+    
+    return folium.Icon(color=color, icon=icon)
 
 # Adicionar gdf_pontos ao mapa com ícones personalizados
 for idx, row in gdf_pontos.iterrows():
