@@ -67,6 +67,7 @@ def read_dados():
     return gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada
 
 gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada = read_dados()
+gdf_pontos = pd.concat( [gdf_pontos_100_metros, gdf_pontos_dentro], ignore_index=True)
 st.subheader('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 col1, col2 = st.columns([1,2])
 filtros_container = st.container(border=True)
@@ -101,7 +102,7 @@ def estilo_area_inundada(feature):
 
 
 folium.GeoJson(
-    gdf_pontos_100_metros,
+    gdf_pontos,
     name='Pontos Dentro',
     #style_function=estilo_pontos_dentro,
     tooltip=GeoJsonTooltip(
@@ -123,4 +124,4 @@ folium.GeoJson(
 folium.LayerControl().add_to(mapa)
 
 # Exibir o mapa
-st_data = folium_static(mapa_vazio, width=450, height=600)
+st_data = folium_static(mapa, width=450, height=600)
