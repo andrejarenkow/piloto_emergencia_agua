@@ -73,7 +73,7 @@ col1, col2 = st.columns([1,2])
 filtros_container = st.container(border=True)
 
 # Definir o centro do mapa
-centro_mapa = [-29, -51]  # substitua pela latitude e longitude do centro do seu mapa
+centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
 
 # Criar o mapa
 mapa = folium.Map(location=centro_mapa, zoom_start=7)
