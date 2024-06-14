@@ -69,7 +69,7 @@ def read_dados():
 gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada = read_dados()
 gdf_pontos = pd.concat( [gdf_pontos_100_metros, gdf_pontos_dentro], ignore_index=True)
 st.subheader('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
-col1, col2 = st.columns([1,2])
+col1, col2 = st.columns([1,1])
 filtros_container = st.container(border=True)
 
 with col1:
