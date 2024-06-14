@@ -30,6 +30,11 @@ def read_dados():
     gdf_pontos_100_metros['Distância'] = '100 metros'
     gdf_pontos_100_metros['style'] = [{'color':'orange'}]*len(gdf_pontos_100_metros)
 
+    #Pontos avaliados pela Babi a 500 metros da mancha de inundação
+    gdf_pontos_500_metros = gpd.read_file('shapefiles/pontos_100m_real.shp', encoding='utf-8' ).set_crs(epsg=4326)
+    gdf_pontos_500_metros['Distância'] = '500 metros'
+    gdf_pontos_500_metros['style'] = [{'color':'orange'}]*len(gdf_pontos_500_metros)
+    
     #Área inundada
     gdf_area_inundada = gpd.read_file('shapefiles/area_inundada_unificada.shp').to_crs(epsg=4326)
     
@@ -42,6 +47,7 @@ def read_dados():
     # Aplicar a função à coluna 'Regional de Saúde'
     gdf_pontos_dentro['Regional d'] = gdf_pontos_dentro['Regional d'].apply(pad_zero)
     gdf_pontos_100_metros['Regional d'] = gdf_pontos_100_metros['Regional d'].apply(pad_zero)
+    gdf_pontos_500_metros['Regional d'] = gdf_pontos_500_metros['Regional d'].apply(pad_zero)
 
 
         # Função para corrigir coordenadas
@@ -64,10 +70,10 @@ def read_dados():
     #dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(corrigir_coordenada)
     #dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(corrigir_coordenada)
 
-    return gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada
+    return gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada, gdf_pontos_500_metros
 
-gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada = read_dados()
-gdf_pontos = pd.concat( [gdf_pontos_100_metros, gdf_pontos_dentro], ignore_index=True)
+gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada, gdf_pontos_500_metros = read_dados()
+gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 st.subheader('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 col1, col2 = st.columns([1,1])
 filtros_container = st.container(border=True)
@@ -95,10 +101,9 @@ def get_icon(distancia, tipo_de_ca):
     
     if distancia == 'Dentro - Alagado':
         color = 'red'
-    elif distancia == '100 metros':
-        color = 'orange'
+
     else:
-        color = 'gray'  # cor padrão se o valor não for encontrado
+        color = 'orange'  # cor padrão se o valor não for encontrado
     
     return folium.Icon(color=color, icon=icon)
 
