@@ -21,17 +21,17 @@ st.set_page_config(
 @st.cache_data
 def read_dados():
     #Pontos avaliados pela Babi dentro da mancha de inundação
-    gdf_pontos_dentro = gpd.read_file('/content/pontos_dentro.shp', encoding='utf-8').set_crs(epsg=4326)
+    gdf_pontos_dentro = gpd.read_file('/shapefiles/pontos_dentro.shp', encoding='utf-8').set_crs(epsg=4326)
     gdf_pontos_dentro['Distância'] = 'Dentro - Alagado'
     gdf_pontos_dentro['style'] = [{'color':'red'}]*len(gdf_pontos_dentro)
 
     #Pontos avaliados pela Babi a 100 metros da mancha de inundação
-    gdf_pontos_100_metros = gpd.read_file('/content/pontos_100m_real.shp', encoding='utf-8' ).set_crs(epsg=4326)
+    gdf_pontos_100_metros = gpd.read_file('/shapefiles/pontos_100m_real.shp', encoding='utf-8' ).set_crs(epsg=4326)
     gdf_pontos_100_metros['Distância'] = '100 metros'
     gdf_pontos_100_metros['style'] = [{'color':'orange'}]*len(gdf_pontos_100_metros)
 
     #Área inundada
-    gdf_area_inundada = gpd.read_file('/content/area_inundada_unificada.shp').to_crs(epsg=4326)
+    gdf_area_inundada = gpd.read_file('/shapefiles/area_inundada_unificada.shp').to_crs(epsg=4326)
     
     # Função para adicionar '0' se o comprimento for menor que 7
     def pad_zero(value):
