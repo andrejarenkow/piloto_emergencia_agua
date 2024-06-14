@@ -115,7 +115,7 @@ superficial_layer = folium.FeatureGroup(name='Superficial')
 for idx, row in gdf_pontos.iterrows():
     marker = folium.Marker(
         location=[row.geometry.centroid.y, row.geometry.centroid.x],
-        icon=get_icon(row['Distância'], row['Tipo de ca']),
+        icon=get_icon(row['Distância'], row['Tipo de captação']),
         tooltip=folium.Tooltip(
             text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
         )
