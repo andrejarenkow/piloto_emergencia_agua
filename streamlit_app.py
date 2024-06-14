@@ -76,7 +76,7 @@ filtros_container = st.container(border=True)
 centro_mapa = [-32, -51]  # substitua pela latitude e longitude do centro do seu mapa
 
 # Criar o mapa
-mapa = folium.Map(location=centro_mapa, zoom_start=5.5)
+mapa = folium.Map(location=centro_mapa, zoom_start=6)
 
 # Função para estilizar as camadas
 def estilo_pontos_dentro(feature):
