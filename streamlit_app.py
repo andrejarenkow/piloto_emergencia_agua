@@ -88,9 +88,9 @@ def get_icon(distancia, tipo_de_ca):
         icon = 'info-sign'  # ícone padrão se o valor não for encontrado
     
     if distancia == 'Dentro - Alagado':
-        color = 'blue'
+        color = 'red'
     elif distancia == '100 metros':
-        color = 'green'
+        color = 'orange'
     else:
         color = 'gray'  # cor padrão se o valor não for encontrado
     
@@ -109,8 +109,8 @@ for idx, row in gdf_pontos.iterrows():
 # Função para estilizar a área inundada
 def estilo_area_inundada(feature):
     return {
-        'fillColor': 'red',
-        'color': 'red',
+        'fillColor': 'blue',
+        'color': 'blue',
         'weight': 1,
         'fillOpacity': 0.6,
     }
@@ -127,4 +127,4 @@ folium.LayerControl().add_to(mapa)
 
 
 # Exibir o mapa
-st_data = folium_static(mapa, width=1000, height=800)
+st_data = folium_static(mapa, width=1000, height=600)
