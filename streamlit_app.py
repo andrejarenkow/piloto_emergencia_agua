@@ -79,7 +79,7 @@ col1, col2 = st.columns([1,1])
 filtros_container = st.container(border=True)
 
 with col1:
-    df_municipio_afetado = pd.pivot_table(gdf_pontos, index='Município', columns=['Distância','Tipo de ca'], values='geometry', aggfunc='count').fillna(0).astype(int)
+    df_municipio_afetado = pd.pivot_table(gdf_pontos, index='Município', columns=['Distância','Tipo de captação'], values='geometry', aggfunc='count').fillna(0).astype(int)
     df_municipio_afetado.columns = [f"{level1} {level2}" if level2 else level1 for level1, level2 in df_municipio_afetado.columns]
     
     st.dataframe(df_municipio_afetado)
@@ -117,14 +117,14 @@ for idx, row in gdf_pontos.iterrows():
         location=[row.geometry.centroid.y, row.geometry.centroid.x],
         icon=get_icon(row['Distância'], row['Tipo de ca']),
         tooltip=folium.Tooltip(
-            text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de ca']}<br>Tipo da Fonte: {row['Tipo da Fo']}"
+            text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
         )
     )
     
     # Adicionar o marcador à camada apropriada
-    if row['Tipo de ca'] == 'SUBTERRANEO':
+    if row['Tipo de captação'] == 'SUBTERRANEO':
         marker.add_to(subterraneo_layer)
-    elif row['Tipo de ca'] == 'SUPERFICIAL':
+    elif row['Tipo de captação'] == 'SUPERFICIAL':
         marker.add_to(superficial_layer)
 
 # Adicionar as camadas ao mapa
