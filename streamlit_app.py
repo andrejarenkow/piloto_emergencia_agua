@@ -73,7 +73,7 @@ col1, col2 = st.columns([1,2])
 filtros_container = st.container(border=True)
 
 # Definir o centro do mapa
-centro_mapa = [-32, -51]  # substitua pela latitude e longitude do centro do seu mapa
+centro_mapa = [-29, -51]  # substitua pela latitude e longitude do centro do seu mapa
 
 # Criar o mapa
 mapa = folium.Map(location=centro_mapa, zoom_start=7)
@@ -136,8 +136,6 @@ folium.GeoJson(
     style_function=estilo_area_inundada
 ).add_to(mapa)
 
-# Adicionar um controle de camadas
-folium.LayerControl().add_to(mapa)
 
 # Adicionar um controle de camadas
 folium.LayerControl().add_to(mapa)
@@ -145,4 +143,4 @@ folium.LayerControl().add_to(mapa)
 
 # Exibir o mapa
 with col2:
-    st_data = folium_static(mapa, width=1000, height=600)
+    st_data = folium_static(mapa, width=1000, height=700)
