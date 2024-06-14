@@ -76,42 +76,35 @@ filtros_container = st.container(border=True)
 centro_mapa = [-32, -51]  # substitua pela latitude e longitude do centro do seu mapa
 
 # Criar o mapa
-mapa = folium.Map(location=centro_mapa, zoom_start=7)
+mapa = folium.Map(location=centro_mapa, zoom_start=5.5)
 
-# Função para estilizar as camadas
-def estilo_pontos_dentro(feature):
-    return {
-        'fillColor': 'blue',
-        'color': 'blue',
-        'weight': 1,
-        'fillOpacity': 0.6,
-        'markerColor': 'color'
-    }
+# Função para obter o ícone baseado na coluna 'Distância'
+def get_icon(distancia):
+    if distancia == 'Dentro - Alagado':
+        return folium.Icon(color='blue', icon='info-sign')
+    elif distancia == '100 metros':
+        return folium.Icon(color='green', icon='info-sign')
+    else:
+        return folium.Icon(color='gray', icon='info-sign')  # ícone padrão se o valor não for encontrado
 
+# Adicionar gdf_pontos ao mapa com ícones personalizados
+for idx, row in gdf_pontos.iterrows():
+    folium.Marker(
+        location=[row.geometry.y, row.geometry.x],
+        icon=get_icon(row['Distância']),
+        tooltip=folium.Tooltip(
+            text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de ca']}<br>Tipo da Fonte: {row['Tipo da Fo']}"
+        )
+    ).add_to(mapa)
 
-
+# Função para estilizar a área inundada
 def estilo_area_inundada(feature):
     return {
-        'fillColor': 'blue',
-        'color': 'blue',
+        'fillColor': 'red',
+        'color': 'red',
         'weight': 1,
         'fillOpacity': 0.6,
     }
-
-# Adicionar gdf_pontos_dentro ao mapa com tooltips
-
-
-folium.GeoJson(
-    gdf_pontos,
-    name='Pontos Dentro',
-    #style_function=estilo_pontos_dentro,
-    tooltip=GeoJsonTooltip(
-        fields=['Distância', 'Município', 'Tipo de ca', 'Tipo da Fo'],
-        aliases=['Distância', 'Município', 'Tipo de Captação', 'Tipo da Fonte'],
-        localize=True
-    )
-).add_to(mapa)
-
 
 # Adicionar gdf_area_inundada ao mapa com estilo
 folium.GeoJson(
