@@ -124,4 +124,4 @@ folium.GeoJson(
 folium.LayerControl().add_to(mapa)
 
 # Exibir o mapa
-st_data = folium_static(mapa, width=1000, height=1000)
+st_data = folium_static(mapa, width=1000, height=800)
