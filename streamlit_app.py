@@ -96,9 +96,9 @@ mapa = folium.Map(location=centro_mapa, zoom_start=7)
 # Função para obter o ícone baseado na coluna 'Distância' e 'Tipo de ca'
 def get_icon(distancia, tipo_de_ca):
     if tipo_de_ca == 'SUBTERRANEO':
-        icon = 'tint'  # exemplo de ícone para subterrâneo
+        icon = 'circle-arrow-down'  # exemplo de ícone para subterrâneo
     elif tipo_de_ca == 'SUPERFICIAL':
-        icon = 'cloud'  # exemplo de ícone para superficial
+        icon = 'tint'  # exemplo de ícone para superficial
     else:
         icon = 'info-sign'  # ícone padrão se o valor não for encontrado
     
