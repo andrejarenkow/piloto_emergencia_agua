@@ -73,19 +73,8 @@ col1, col2 = st.columns([1,2])
 filtros_container = st.container(border=True)
 
 with col1:
-    filtro_tipo_captacao = gdf_pontos['Tipo de ca']=='SUPERFICIAL'
-    dados_por_municipio = pd.pivot_table(gdf_pontos[filtro_tipo_captacao], index='Município', columns=['Distância'], values='geometry', aggfunc='count').fillna(0).astype(int).sort_values('Dentro - Alagado', ascending=False).reset_index()
-    dados_por_municipio = pd.melt(dados_por_municipio, id_vars=['Município'], var_name='Distância', value_name='Quantidade').sort_values('Quantidade')
-    
-    fig = px.bar(dados_por_municipio, x="Quantidade", y="Município", color="Distância", title="Municípios mais afetados em formas de abastecimento do tipo Superficial")
-    st.plotly_chart(fig, use_container_width=False)
-
-    filtro_tipo_captacao = gdf_pontos['Tipo de ca']=='SUBTERRANEO'
-    dados_por_municipio = pd.pivot_table(gdf_pontos[filtro_tipo_captacao], index='Município', columns=['Distância'], values='geometry', aggfunc='count').fillna(0).astype(int).sort_values('Dentro - Alagado', ascending=False).reset_index()
-    dados_por_municipio = pd.melt(dados_por_municipio, id_vars=['Município'], var_name='Distância', value_name='Quantidade').sort_values('Quantidade')
-    
-    fig = px.bar(dados_por_municipio, x="Quantidade", y="Município", color="Distância", title="Municípios mais afetados em formas de abastecimento do tipo Subterrânea")
-    st.plotly_chart(fig, use_container_width=False)
+    municipios_afetados = pd.pivot_table(gdf_pontos, index='Município', columns=['Distância','Tipo de ca'], values='geometry', aggfunc='count').fillna(0).astype(int)#.sort_values('Dentro - Alagado', ascending=False)
+    st.data_frame(municipios_afetados)
 
 # Definir o centro do mapa
 centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
