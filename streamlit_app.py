@@ -76,7 +76,7 @@ filtros_container = st.container(border=True)
 centro_mapa = [-32, -51]  # substitua pela latitude e longitude do centro do seu mapa
 
 # Criar o mapa
-mapa = folium.Map(location=centro_mapa, zoom_start=5.5)
+mapa = folium.Map(location=centro_mapa, zoom_start=7)
 
 # Função para obter o ícone baseado na coluna 'Distância' e 'Tipo de ca'
 def get_icon(distancia, tipo_de_ca):
@@ -88,9 +88,9 @@ def get_icon(distancia, tipo_de_ca):
         icon = 'info-sign'  # ícone padrão se o valor não for encontrado
     
     if distancia == 'Dentro - Alagado':
-        color = 'red'
+        color = 'blue'
     elif distancia == '100 metros':
-        color = 'orange'
+        color = 'green'
     else:
         color = 'gray'  # cor padrão se o valor não for encontrado
     
@@ -100,7 +100,7 @@ def get_icon(distancia, tipo_de_ca):
 for idx, row in gdf_pontos.iterrows():
     folium.Marker(
         location=[row.geometry.y, row.geometry.x],
-        icon=get_icon(row['Distância']),
+        icon=get_icon(row['Distância'], row['Tipo de ca']),
         tooltip=folium.Tooltip(
             text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de ca']}<br>Tipo da Fonte: {row['Tipo da Fo']}"
         )
@@ -109,8 +109,8 @@ for idx, row in gdf_pontos.iterrows():
 # Função para estilizar a área inundada
 def estilo_area_inundada(feature):
     return {
-        'fillColor': '#77B7F7',
-        'color': '#77B7F7',
+        'fillColor': 'red',
+        'color': 'red',
         'weight': 1,
         'fillOpacity': 0.6,
     }
@@ -124,6 +124,7 @@ folium.GeoJson(
 
 # Adicionar um controle de camadas
 folium.LayerControl().add_to(mapa)
+
 
 # Exibir o mapa
 st_data = folium_static(mapa, width=1000, height=800)
