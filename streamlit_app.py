@@ -17,6 +17,12 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state='collapsed')
 
+col1, col2, col3 = st.columns([1,4,1])
+
+col1.image('https://github.com/andrejarenkow/csv/blob/master/logo_cevs%20(2).png?raw=true', width=100)
+col2.subheader('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
+col3.image('https://github.com/andrejarenkow/csv/blob/master/logo_estado%20(3)%20(1).png?raw=true', width=150)
+
 # Lê os dados de um arquivo Excel online
 @st.cache_data
 def read_dados():
@@ -67,7 +73,7 @@ def read_dados():
 
 gdf_pontos, gdf_area_inundada = read_dados()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
-st.subheader('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
+#st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 col1, col2 = st.columns([1,1])
 filtros_container = st.container(border=True)
 
