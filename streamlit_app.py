@@ -85,7 +85,7 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     df_municipio_afetado = pd.pivot_table(gdf_pontos, index='Município', columns=['Distância','Tipo de captação'], values='geometry', aggfunc='count').fillna(0).astype(int) 
     df_municipio_afetado.columns = [f"{level1} {level2}" if level2 else level1 for level1, level2 in df_municipio_afetado.columns]
     
-    st.dataframe(df_municipio_afetado.sort_values('alagado SUPERFICIAL', ascending=False)
+    st.dataframe(df_municipio_afetado.sort_values('alagado SUPERFICIAL', ascending=False))
 
 # Definir o centro do mapa
 centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
