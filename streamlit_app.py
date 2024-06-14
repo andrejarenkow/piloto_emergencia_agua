@@ -22,7 +22,7 @@ st.set_page_config(
 def read_dados():
     #Pontos avaliados pela Babi dentro da mancha de inundação
     gdf_pontos_dentro = gpd.read_file('shapefiles/pontos_dentro_show.gpkg', encoding='utf-8').set_crs(epsg=4326)
-    gdf_pontos_dentro['Distância'] = 'Dentro - Alagado'
+    gdf_pontos_dentro['Distância'] = 'Alagado'
 
 
     #Pontos avaliados pela Babi a 500 metros da mancha de inundação
@@ -102,7 +102,7 @@ def get_icon(distancia, tipo_de_ca):
     else:
         icon = 'info-sign'  # ícone padrão se o valor não for encontrado
     
-    if distancia == 'Dentro - Alagado':
+    if distancia == 'Alagado':
         color = 'red'
 
     else:
