@@ -45,10 +45,10 @@ def read_dados():
         return value
 
     # Aplicar a função à coluna 'Regional de Saúde'
-    gdf_pontos_dentro['Regional d'] = gdf_pontos_dentro['Regional d'].apply(pad_zero)
-    gdf_pontos_100_metros['Regional d'] = gdf_pontos_100_metros['Regional d'].apply(pad_zero)
-    gdf_pontos_500_metros['Regional d'] = gdf_pontos_500_metros['Regional d'].apply(pad_zero)
-
+    #gdf_pontos_dentro['Regional d'] = gdf_pontos_dentro['Regional d'].apply(pad_zero)
+    #gdf_pontos_100_metros['Regional d'] = gdf_pontos_100_metros['Regional d'].apply(pad_zero)
+    gdf_pontos_500_metros['Regional de Saúde'] = gdf_pontos_500_metros['Regional d'].apply(pad_zero)
+    gdf_pontos = gdf_pontos_500_metros.copy()
 
         # Função para corrigir coordenadas
     def corrigir_coordenada(numero):
@@ -70,10 +70,10 @@ def read_dados():
     #dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(corrigir_coordenada)
     #dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(corrigir_coordenada)
 
-    return gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada, gdf_pontos_500_metros
+    return gdf_pontos, gdf_area_inundada
 
-gdf_pontos_dentro, gdf_pontos_100_metros, gdf_area_inundada, gdf_pontos_500_metros = read_dados()
-gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
+gdf_pontos, gdf_area_inundada = read_dados()
+#gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 st.subheader('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 col1, col2 = st.columns([1,1])
 filtros_container = st.container(border=True)
