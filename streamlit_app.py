@@ -114,7 +114,7 @@ superficial_layer = folium.FeatureGroup(name='Superficial')
 # Adicionar gdf_pontos ao mapa com ícones personalizados e grupos de camadas
 for idx, row in gdf_pontos.iterrows():
     marker = folium.Marker(
-        location=[row.geometry.y, row.geometry.x],
+        location=[row.geometry.centroid.y, row.geometry.centroid.x],
         icon=get_icon(row['Distância'], row['Tipo de ca']),
         tooltip=folium.Tooltip(
             text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de ca']}<br>Tipo da Fonte: {row['Tipo da Fo']}"
