@@ -21,19 +21,13 @@ st.set_page_config(
 @st.cache_data
 def read_dados():
     #Pontos avaliados pela Babi dentro da mancha de inundação
-    gdf_pontos_dentro = gpd.read_file('shapefiles/pontos_dentro.shp', encoding='utf-8').set_crs(epsg=4326)
+    gdf_pontos_dentro = gpd.read_file('/content/pontos_dentro_show.gpkg', encoding='utf-8').set_crs(epsg=4326)
     gdf_pontos_dentro['Distância'] = 'Dentro - Alagado'
-    gdf_pontos_dentro['style'] = [{'color':'red'}]*len(gdf_pontos_dentro)
 
-    #Pontos avaliados pela Babi a 100 metros da mancha de inundação
-    gdf_pontos_100_metros = gpd.read_file('shapefiles/pontos_100m_real.shp', encoding='utf-8' ).set_crs(epsg=4326)
-    gdf_pontos_100_metros['Distância'] = '100 metros'
-    gdf_pontos_100_metros['style'] = [{'color':'orange'}]*len(gdf_pontos_100_metros)
 
     #Pontos avaliados pela Babi a 500 metros da mancha de inundação
     gdf_pontos_500_metros = gpd.read_file('shapefiles/pontos_500_e_mergulhadores_denovo.gpkg', encoding='utf-8' ).set_crs(epsg=4326, allow_override=True)
     gdf_pontos_500_metros['Distância'] = 'até 500 metros'
-    gdf_pontos_500_metros['style'] = [{'color':'orange'}]*len(gdf_pontos_500_metros)
     
     #Área inundada
     gdf_area_inundada = gpd.read_file('shapefiles/area_inundada_unificada.shp').to_crs(epsg=4326)
@@ -45,10 +39,9 @@ def read_dados():
         return value
 
     # Aplicar a função à coluna 'Regional de Saúde'
-    #gdf_pontos_dentro['Regional d'] = gdf_pontos_dentro['Regional d'].apply(pad_zero)
-    #gdf_pontos_100_metros['Regional d'] = gdf_pontos_100_metros['Regional d'].apply(pad_zero)
-    gdf_pontos_500_metros['Regional de Saúde'] = gdf_pontos_500_metros['Regional de Saúde'].apply(pad_zero)
-    gdf_pontos = gdf_pontos_500_metros.copy()
+    gdf_pontos = pd.concat([gdf_pontos_dentro, gdf_pontos_500_metros], ignore_index=True)
+    gdf_pontos = gdf_pontos.drop_duplicates(subset=['Latitude_corrigida'], keep='first')
+    gdf_pontos['Regional de Saúde'] = gdf_pontos['Regional de Saúde'].apply(pad_zero)
 
         # Função para corrigir coordenadas
     def corrigir_coordenada(numero):
