@@ -100,8 +100,8 @@ for idx, row in gdf_pontos.iterrows():
 # Função para estilizar a área inundada
 def estilo_area_inundada(feature):
     return {
-        'fillColor': 'blue',
-        'color': 'blue',
+        'fillColor': '#77B7F7',
+        'color': '#77B7F7',
         'weight': 1,
         'fillOpacity': 0.6,
     }
