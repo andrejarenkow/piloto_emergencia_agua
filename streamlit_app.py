@@ -96,21 +96,35 @@ def get_icon(distancia, tipo_de_ca):
     
     return folium.Icon(color=color, icon=icon)
 
-# Adicionar gdf_pontos ao mapa com ícones personalizados
+# Criar grupos de camadas
+subterraneo_layer = folium.FeatureGroup(name='Subterrâneo')
+superficial_layer = folium.FeatureGroup(name='Superficial')
+
+# Adicionar gdf_pontos ao mapa com ícones personalizados e grupos de camadas
 for idx, row in gdf_pontos.iterrows():
-    folium.Marker(
+    marker = folium.Marker(
         location=[row.geometry.y, row.geometry.x],
         icon=get_icon(row['Distância'], row['Tipo de ca']),
         tooltip=folium.Tooltip(
             text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de ca']}<br>Tipo da Fonte: {row['Tipo da Fo']}"
         )
-    ).add_to(mapa)
+    )
+    
+    # Adicionar o marcador à camada apropriada
+    if row['Tipo de ca'] == 'SUBTERRANEO':
+        marker.add_to(subterraneo_layer)
+    elif row['Tipo de ca'] == 'SUPERFICIAL':
+        marker.add_to(superficial_layer)
+
+# Adicionar as camadas ao mapa
+subterraneo_layer.add_to(mapa)
+superficial_layer.add_to(mapa)
 
 # Função para estilizar a área inundada
 def estilo_area_inundada(feature):
     return {
-        'fillColor': 'blue',
-        'color': 'blue',
+        'fillColor': '#77b7f7',
+        'color': '#77b7f7',
         'weight': 1,
         'fillOpacity': 0.6,
     }
@@ -121,6 +135,9 @@ folium.GeoJson(
     name='Área Inundada',
     style_function=estilo_area_inundada
 ).add_to(mapa)
+
+# Adicionar um controle de camadas
+folium.LayerControl().add_to(mapa)
 
 # Adicionar um controle de camadas
 folium.LayerControl().add_to(mapa)
