@@ -47,7 +47,7 @@ def read_dados():
     # Aplicar a função à coluna 'Regional de Saúde'
     #gdf_pontos_dentro['Regional d'] = gdf_pontos_dentro['Regional d'].apply(pad_zero)
     #gdf_pontos_100_metros['Regional d'] = gdf_pontos_100_metros['Regional d'].apply(pad_zero)
-    gdf_pontos_500_metros['Regional de Saúde'] = gdf_pontos_500_metros['Regional d'].apply(pad_zero)
+    gdf_pontos_500_metros['Regional de Saúde'] = gdf_pontos_500_metros['Regional de Saúde'].apply(pad_zero)
     gdf_pontos = gdf_pontos_500_metros.copy()
 
         # Função para corrigir coordenadas
