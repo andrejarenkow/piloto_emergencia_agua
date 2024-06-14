@@ -81,9 +81,9 @@ mapa = folium.Map(location=centro_mapa, zoom_start=5.5)
 # Função para obter o ícone baseado na coluna 'Distância'
 def get_icon(distancia):
     if distancia == 'Dentro - Alagado':
-        return folium.Icon(color='blue', icon='info-sign')
+        return folium.Icon(color='red', icon='info-sign')
     elif distancia == '100 metros':
-        return folium.Icon(color='green', icon='info-sign')
+        return folium.Icon(color='orange', icon='info-sign')
     else:
         return folium.Icon(color='gray', icon='info-sign')  # ícone padrão se o valor não for encontrado
 
@@ -100,8 +100,8 @@ for idx, row in gdf_pontos.iterrows():
 # Função para estilizar a área inundada
 def estilo_area_inundada(feature):
     return {
-        'fillColor': 'red',
-        'color': 'red',
+        'fillColor': 'blue',
+        'color': 'blue',
         'weight': 1,
         'fillOpacity': 0.6,
     }
