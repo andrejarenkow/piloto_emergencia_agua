@@ -31,7 +31,7 @@ def read_dados():
     gdf_pontos_100_metros['style'] = [{'color':'orange'}]*len(gdf_pontos_100_metros)
 
     #Pontos avaliados pela Babi a 500 metros da mancha de inundação
-    gdf_pontos_500_metros = gpd.read_file('shapefiles/pontos_500_e_mergulhadores.shp', encoding='utf-8' ).set_crs(epsg=4326, allow_override=True)
+    gdf_pontos_500_metros = gpd.read_file('shapefiles/pontos_500_e_mergulhadores_denovo.gpkg', encoding='utf-8' ).set_crs(epsg=4326, allow_override=True)
     gdf_pontos_500_metros['Distância'] = 'até 500 metros'
     gdf_pontos_500_metros['style'] = [{'color':'orange'}]*len(gdf_pontos_500_metros)
     
