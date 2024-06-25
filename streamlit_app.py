@@ -98,9 +98,9 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
 
     # Imprimindo dataframe
     #gdf_pontos.columns
-    gdf_pontos[['Município','Regional de Saúde','Distância',
+    st.dataframe(gdf_pontos[['Município','Regional de Saúde','Distância',
                 'Nome da Forma de Abastecimento', 'Tipo de captação',
-               'Sigla da Instituição']]
+               'Sigla da Instituição']])
     st.dataframe(df_municipio_afetado.sort_values('Alagado SUPERFICIAL', ascending=False))
 
 # Definir o centro do mapa
