@@ -136,7 +136,7 @@ for idx, row in gdf_pontos.iterrows():
         location=[row.geometry.centroid.y, row.geometry.centroid.x],
         icon=get_icon(row['Distância'], row['Tipo de captação']),
         tooltip=folium.Tooltip(
-            text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
+            text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Nome: {row['Nome da Forma de Abastecimento']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
         )
     )
     
