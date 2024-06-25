@@ -165,4 +165,4 @@ folium.LayerControl().add_to(mapa)
 with col2:
     st_data = folium_static(mapa, width=800, height=700)
 
-st.dataframe(gdf_pontos)
+gdf_pontos
