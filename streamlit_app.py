@@ -97,6 +97,10 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     col_total2.metric('Total de pontos superficial', (gdf_pontos['Tipo de captação']=='SUPERFICIAL').sum())
 
     # Imprimindo dataframe
+    #gdf_pontos.columns
+    gdf_pontos[['Município','Regional de Saúde','Distância',
+                'Nome da Forma de Abastecimento', 'Tipo de captação',
+               'Sigla da Instituição']]
     st.dataframe(df_municipio_afetado.sort_values('Alagado SUPERFICIAL', ascending=False))
 
 # Definir o centro do mapa
@@ -171,8 +175,5 @@ folium.LayerControl().add_to(mapa)
 with col2:
     st_data = folium_static(mapa, width=800, height=700)
 
-#gdf_pontos.columns
-gdf_pontos[['Município','Regional de Saúde','Distância',
-            'Nome da Forma de Abastecimento', 'Tipo de captação',
-           'Sigla da Instituição']]
+
 
