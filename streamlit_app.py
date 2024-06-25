@@ -147,7 +147,7 @@ for idx, row in gdf_pontos.iterrows():
         marker.add_to(superficial_layer)
 
 # Adicionar as camadas ao mapa
-subterraneo_layer.add_to(mapa)
+#subterraneo_layer.add_to(mapa)
 superficial_layer.add_to(mapa)
 
 # Função para estilizar a área inundada
