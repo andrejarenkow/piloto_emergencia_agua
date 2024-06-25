@@ -166,3 +166,4 @@ with col2:
     st_data = folium_static(mapa, width=800, height=700)
 
 gdf_pontos[['Município','Regional de Saúde','Distância','Nome da Forma de Abastecimento']]
+gdf_pontos.columns
