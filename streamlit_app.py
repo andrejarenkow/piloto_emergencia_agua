@@ -94,8 +94,8 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     st.dataframe(df_municipio_afetado.sort_values('Alagado SUPERFICIAL', ascending=False))
     col_total1, col_total2, col_total3  = st.columns(3)
     col_total1.metric('Total de pontos', len(gdf_pontos))
-    col_total1.metric('Total de pontos superficial', (gdf_pontos['Tipo de captação']=='SUPERFICIAL').sum())
-    col_total1.metric('Total de pontos', len(gdf_pontos))
+    col_total2.metric('Total de pontos superficial', (gdf_pontos['Tipo de captação']=='SUPERFICIAL').sum())
+    #col_total1.metric('Total de pontos', len(gdf_pontos))
 
 # Definir o centro do mapa
 centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
