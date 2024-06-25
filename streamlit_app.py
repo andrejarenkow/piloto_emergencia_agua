@@ -102,7 +102,7 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     st.dataframe(gdf_pontos[['Município','Regional de Saúde','Distância',
                 'Nome da Forma de Abastecimento', 'Tipo de captação',
                'Sigla da Instituição']])
-    st.dataframe(df_municipio_afetado.sort_values('Alagado SUPERFICIAL', ascending=False))
+    st.dataframe(df_municipio_afetado)
 
 # Definir o centro do mapa
 centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
