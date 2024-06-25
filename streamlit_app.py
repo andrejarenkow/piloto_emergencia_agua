@@ -165,4 +165,4 @@ folium.LayerControl().add_to(mapa)
 with col2:
     st_data = folium_static(mapa, width=800, height=700)
 
-gdf_pontos[['Município','Regional de Saúde']]
+gdf_pontos[['Município','Regional de Saúde','Distância','Nome da Forma de Abastecimento']]
