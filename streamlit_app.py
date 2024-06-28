@@ -107,11 +107,11 @@ with tab_producao:
         }
     
     # Adicionar gdf_area_inundada ao mapa com estilo
-    folium.GeoJson(
-        gdf_area_inundada,
-        name='Área Inundada',
-        style_function=estilo_area_inundada
-    ).add_to(m)
+    #folium.GeoJson(
+    #    gdf_area_inundada,
+    #    name='Área Inundada',
+    #    style_function=estilo_area_inundada
+    #).add_to(m)
     
     # Cria um FeatureGroup para cada tipo de ponto
     fg_eta = folium.FeatureGroup(name="Ponto da ETA")
@@ -126,12 +126,12 @@ with tab_producao:
         ).add_to(fg_eta)
     
     # Adiciona os pontos "Ponto de Captação" ao FeatureGroup correspondente
-    for _, row in df.iterrows():
-        folium.Marker(
-            location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
-            popup=row['Nome da forma de abastecimento'],
-            icon=folium.Icon(color='blue')  # Alterar a cor conforme necessário
-        ).add_to(fg_captacao)
+    #for _, row in df.iterrows():
+    #    folium.Marker(
+    #        location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
+    #        popup=row['Nome da forma de abastecimento'],
+    #        icon=folium.Icon(color='blue')  # Alterar a cor conforme necessário
+    #    ).add_to(fg_captacao)
     
     # Adiciona os FeatureGroups ao mapa
     fg_eta.add_to(m)
