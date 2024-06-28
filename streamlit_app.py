@@ -76,7 +76,7 @@ gdf_pontos, gdf_area_inundada = read_dados()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 #st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
-with tab_producao:
+with tab_planejamento:
     col1, col2 = st.columns([1,1])
     filtros_container = st.container(border=True)
     
