@@ -25,7 +25,7 @@ col1.image('https://github.com/andrejarenkow/csv/blob/master/logo_estado%20(3)%2
 
 # Lê os dados de um arquivo Excel online
 @st.cache_data
-def read_dados():
+def read_dados(ttl=3600):
 
     dados = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
                       sheet_name='Pontos de coleta')
