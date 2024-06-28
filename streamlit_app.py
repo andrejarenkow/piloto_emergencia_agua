@@ -26,6 +26,12 @@ col1.image('https://github.com/andrejarenkow/csv/blob/master/logo_estado%20(3)%2
 # Lê os dados de um arquivo Excel online
 @st.cache_data
 def read_dados():
+
+    dados = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
+                      sheet_name='Pontos de coleta')
+
+    dados = dados.dropna(subset=['Latitude ETA']).reset_index(drop=True)
+    
     #Pontos avaliados pela Babi dentro da mancha de inundação
     gdf_pontos_dentro = gpd.read_file('shapefiles/pontos_dentro_show.gpkg', encoding='utf-8').set_crs(epsg=4326)
     gdf_pontos_dentro['Distância'] = 'Alagado'
@@ -70,12 +76,29 @@ def read_dados():
     #dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(corrigir_coordenada)
     #dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(corrigir_coordenada)
 
-    return gdf_pontos, gdf_area_inundada
+    return gdf_pontos, gdf_area_inundada, dados
 
-gdf_pontos, gdf_area_inundada = read_dados()
+gdf_pontos, gdf_area_inundada, dados = read_dados()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 #st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
+
+with tab_producao:
+    df = dados.copy()
+
+    # Cria o mapa centralizado na média das coordenadas
+    map_center = [df['Latitude ETA'].mean(), df['Longitude ETA'].mean()]
+    m = folium.Map(location=map_center, zoom_start=10)
+    
+    # Adiciona os pontos do DataFrame no mapa
+    for _, row in df.iterrows():
+        folium.Marker(
+            location=[row['Latitude ETA'], row['Longitude ETA']],
+            popup=row['Nome da forma de abastecimento'],
+        ).add_to(m)
+
+    st_data = folium_static(m, width=800, height=700)
+
 with tab_planejamento:
     col1, col2 = st.columns([1,1])
     filtros_container = st.container(border=True)
@@ -104,7 +127,7 @@ with tab_planejamento:
         st.dataframe(gdf_pontos[['Município','Regional de Saúde','Distância',
                     'Nome da Forma de Abastecimento', 'Tipo de captação',
                    'Sigla da Instituição']])
-        st.dataframe(df_municipio_afetado)
+        #st.dataframe(df_municipio_afetado)
     
     # Definir o centro do mapa
     centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
