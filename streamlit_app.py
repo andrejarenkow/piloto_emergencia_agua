@@ -31,6 +31,7 @@ def read_dados():
                       sheet_name='Pontos de coleta')
 
     dados = dados.dropna(subset=['Latitude ETA']).reset_index(drop=True)
+    dados['cor'] = 'red'
     
     #Pontos avaliados pela Babi dentro da mancha de inundação
     gdf_pontos_dentro = gpd.read_file('shapefiles/pontos_dentro_show.gpkg', encoding='utf-8').set_crs(epsg=4326)
@@ -124,7 +125,7 @@ with tab_producao:
         folium.Marker(
             location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
             popup=row['Nome da forma de abastecimento'],
-            color='red'
+            icon=folium.Icon(color=row['cor'])
         ).add_to(m)
 
     with col2_:
