@@ -229,8 +229,5 @@ with tab_planejamento:
     
     
     # Exibir o mapa
-    with col2:
+    #with col2:
         #st_data = folium_static(mapa, width=800, height=700)
-
-
-
