@@ -141,7 +141,10 @@ with tab_producao:
     folium.LayerControl().add_to(m)
 
     with col2_:
-        st_data = folium_static(m, width=800, height=700)
+        st_data = st_folium(m, width=800, height=700)
+
+    with col1_:
+        st.write(output)
 
 with tab_planejamento:
     col1, col2 = st.columns([1,1])
