@@ -134,14 +134,21 @@ with tab_producao:
     #    ).add_to(fg_captacao)
     
     # Adiciona os FeatureGroups ao mapa
-    fg_eta.add_to(m)
-    fg_captacao.add_to(m)
+    #fg_eta.add_to(m)
+    #fg_captacao.add_to(m)
     
     # Adicionar um controle de camadas
     folium.LayerControl().add_to(m)
 
     with col2_:
-        st_data = st_folium(m, width=800, height=700,)
+        st_data = st_folium(m,
+                            center=st.session_state["center"],
+                            zoom=st.session_state["zoom"],
+                            key="new",
+                            feature_group_to_add=fg_eta,
+                            height=400,
+                            width=700,)
+
 
     with col1_:
         st.write(st_data)
