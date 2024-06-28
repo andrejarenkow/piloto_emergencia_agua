@@ -145,7 +145,8 @@ with tab_producao:
                             key="new",
                             feature_group_to_add=fg_eta,
                             height=1000,
-                            width=800,)
+                            width=800,
+                           returned_objects=["last_object_clicked_popup"])
 
 
     with col1_:
