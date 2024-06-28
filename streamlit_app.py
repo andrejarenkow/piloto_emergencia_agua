@@ -124,6 +124,7 @@ with tab_producao:
         folium.Marker(
             location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
             popup=row['Nome da forma de abastecimento'],
+            color='red'
         ).add_to(m)
 
     with col2_:
