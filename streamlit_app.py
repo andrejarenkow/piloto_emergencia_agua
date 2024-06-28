@@ -87,7 +87,7 @@ tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
 with tab_producao:
     col1_, col2_ = st.columns([1,1])
 
-    with col1_:
+    #with col1_:
         
     
     # Supondo que dados seja o DataFrame original
