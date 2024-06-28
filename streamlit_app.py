@@ -75,106 +75,108 @@ def read_dados():
 gdf_pontos, gdf_area_inundada = read_dados()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 #st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
-col1, col2 = st.columns([1,1])
-filtros_container = st.container(border=True)
-
-with col1:
-    st.write(
-        """
-Para o painel das formas de abastecimento de água e a área inundada no RS em maio de 2024, foram utilizados pontos de abastecimento de água,
-cujas coordenadas foram retiradas do sistema SISAGUA, e a mancha de inundação foi obtida a partir dos dados fornecidos por pesquisadores da UFRGS
-(disponíveis em Sistema de Informações Geográficas Único). Ambos os conjuntos de dados foram inseridos no software QGIS, 
-onde foram cruzados para identificar quais pontos de abastecimento estariam inundados de acordo com a mancha de inundação. 
-Em seguida, foi gerado um buffer de 500 metros ao redor de todos os pontos de abastecimento, permitindo uma nova análise para identificar os pontos próximos à área de inundação,
-tratando-os como pontos de alerta para futuros eventos climáticos extremos.
+tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
+with tab_producao:
+    col1, col2 = st.columns([1,1])
+    filtros_container = st.container(border=True)
+    
+    with col1:
+        st.write(
             """
-    )
-    df_municipio_afetado = pd.pivot_table(gdf_pontos, index='Município', columns=['Distância','Tipo de captação'], values='geometry', aggfunc='count').fillna(0).astype(int) 
-    df_municipio_afetado.columns = [f"{level1} {level2}" if level2 else level1 for level1, level2 in df_municipio_afetado.columns]
-
-    # Criando 3 colunas para metricas
-    col_total1, col_total2, col_total3  = st.columns(3)
-    col_total1.metric('Total de pontos', len(gdf_pontos))
-    col_total2.metric('Total de pontos superficial', (gdf_pontos['Tipo de captação']=='SUPERFICIAL').sum())
-
-    # Imprimindo dataframe
-    #gdf_pontos.columns
-    st.dataframe(gdf_pontos[['Município','Regional de Saúde','Distância',
-                'Nome da Forma de Abastecimento', 'Tipo de captação',
-               'Sigla da Instituição']])
-    st.dataframe(df_municipio_afetado)
-
-# Definir o centro do mapa
-centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
-
-# Criar o mapa
-mapa = folium.Map(location=centro_mapa, zoom_start=7)
-
-# Função para obter o ícone baseado na coluna 'Distância' e 'Tipo de ca'
-def get_icon(distancia, tipo_de_ca):
-    if tipo_de_ca == 'SUBTERRANEO':
-        icon = 'circle-arrow-down'  # exemplo de ícone para subterrâneo
-    elif tipo_de_ca == 'SUPERFICIAL':
-        icon = 'tint'  # exemplo de ícone para superficial
-    else:
-        icon = 'info-sign'  # ícone padrão se o valor não for encontrado
-    
-    if distancia == 'Alagado':
-        color = 'red'
-
-    else:
-        color = 'orange'  # cor padrão se o valor não for encontrado
-    
-    return folium.Icon(color=color, icon=icon)
-
-# Criar grupos de camadas
-subterraneo_layer = folium.FeatureGroup(name='Subterrâneo')
-superficial_layer = folium.FeatureGroup(name='Superficial')
-
-# Adicionar gdf_pontos ao mapa com ícones personalizados e grupos de camadas
-for idx, row in gdf_pontos.iterrows():
-    marker = folium.Marker(
-        location=[row.geometry.centroid.y, row.geometry.centroid.x],
-        icon=get_icon(row['Distância'], row['Tipo de captação']),
-        tooltip=folium.Tooltip(
-            text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Nome: {row['Nome da Forma de Abastecimento']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
+    Para o painel das formas de abastecimento de água e a área inundada no RS em maio de 2024, foram utilizados pontos de abastecimento de água,
+    cujas coordenadas foram retiradas do sistema SISAGUA, e a mancha de inundação foi obtida a partir dos dados fornecidos por pesquisadores da UFRGS
+    (disponíveis em Sistema de Informações Geográficas Único). Ambos os conjuntos de dados foram inseridos no software QGIS, 
+    onde foram cruzados para identificar quais pontos de abastecimento estariam inundados de acordo com a mancha de inundação. 
+    Em seguida, foi gerado um buffer de 500 metros ao redor de todos os pontos de abastecimento, permitindo uma nova análise para identificar os pontos próximos à área de inundação,
+    tratando-os como pontos de alerta para futuros eventos climáticos extremos.
+                """
         )
-    )
+        df_municipio_afetado = pd.pivot_table(gdf_pontos, index='Município', columns=['Distância','Tipo de captação'], values='geometry', aggfunc='count').fillna(0).astype(int) 
+        df_municipio_afetado.columns = [f"{level1} {level2}" if level2 else level1 for level1, level2 in df_municipio_afetado.columns]
     
-    # Adicionar o marcador à camada apropriada
-    if row['Tipo de captação'] == 'SUBTERRANEO':
-        marker.add_to(subterraneo_layer)
-    elif row['Tipo de captação'] == 'SUPERFICIAL':
-        marker.add_to(superficial_layer)
-
-# Adicionar as camadas ao mapa
-#subterraneo_layer.add_to(mapa)
-superficial_layer.add_to(mapa)
-
-# Função para estilizar a área inundada
-def estilo_area_inundada(feature):
-    return {
-        'fillColor': '#77b7f7',
-        'color': '#77b7f7',
-        'weight': 1,
-        'fillOpacity': 0.6,
-    }
-
-# Adicionar gdf_area_inundada ao mapa com estilo
-folium.GeoJson(
-    gdf_area_inundada,
-    name='Área Inundada',
-    style_function=estilo_area_inundada
-).add_to(mapa)
-
-
-# Adicionar um controle de camadas
-folium.LayerControl().add_to(mapa)
-
-
-# Exibir o mapa
-with col2:
-    st_data = folium_static(mapa, width=800, height=700)
+        # Criando 3 colunas para metricas
+        col_total1, col_total2, col_total3  = st.columns(3)
+        col_total1.metric('Total de pontos', len(gdf_pontos))
+        col_total2.metric('Total de pontos superficial', (gdf_pontos['Tipo de captação']=='SUPERFICIAL').sum())
+    
+        # Imprimindo dataframe
+        #gdf_pontos.columns
+        st.dataframe(gdf_pontos[['Município','Regional de Saúde','Distância',
+                    'Nome da Forma de Abastecimento', 'Tipo de captação',
+                   'Sigla da Instituição']])
+        st.dataframe(df_municipio_afetado)
+    
+    # Definir o centro do mapa
+    centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
+    
+    # Criar o mapa
+    mapa = folium.Map(location=centro_mapa, zoom_start=7)
+    
+    # Função para obter o ícone baseado na coluna 'Distância' e 'Tipo de ca'
+    def get_icon(distancia, tipo_de_ca):
+        if tipo_de_ca == 'SUBTERRANEO':
+            icon = 'circle-arrow-down'  # exemplo de ícone para subterrâneo
+        elif tipo_de_ca == 'SUPERFICIAL':
+            icon = 'tint'  # exemplo de ícone para superficial
+        else:
+            icon = 'info-sign'  # ícone padrão se o valor não for encontrado
+        
+        if distancia == 'Alagado':
+            color = 'red'
+    
+        else:
+            color = 'orange'  # cor padrão se o valor não for encontrado
+        
+        return folium.Icon(color=color, icon=icon)
+    
+    # Criar grupos de camadas
+    subterraneo_layer = folium.FeatureGroup(name='Subterrâneo')
+    superficial_layer = folium.FeatureGroup(name='Superficial')
+    
+    # Adicionar gdf_pontos ao mapa com ícones personalizados e grupos de camadas
+    for idx, row in gdf_pontos.iterrows():
+        marker = folium.Marker(
+            location=[row.geometry.centroid.y, row.geometry.centroid.x],
+            icon=get_icon(row['Distância'], row['Tipo de captação']),
+            tooltip=folium.Tooltip(
+                text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Nome: {row['Nome da Forma de Abastecimento']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
+            )
+        )
+        
+        # Adicionar o marcador à camada apropriada
+        if row['Tipo de captação'] == 'SUBTERRANEO':
+            marker.add_to(subterraneo_layer)
+        elif row['Tipo de captação'] == 'SUPERFICIAL':
+            marker.add_to(superficial_layer)
+    
+    # Adicionar as camadas ao mapa
+    #subterraneo_layer.add_to(mapa)
+    superficial_layer.add_to(mapa)
+    
+    # Função para estilizar a área inundada
+    def estilo_area_inundada(feature):
+        return {
+            'fillColor': '#77b7f7',
+            'color': '#77b7f7',
+            'weight': 1,
+            'fillOpacity': 0.6,
+        }
+    
+    # Adicionar gdf_area_inundada ao mapa com estilo
+    folium.GeoJson(
+        gdf_area_inundada,
+        name='Área Inundada',
+        style_function=estilo_area_inundada
+    ).add_to(mapa)
+    
+    
+    # Adicionar um controle de camadas
+    folium.LayerControl().add_to(mapa)
+    
+    
+    # Exibir o mapa
+    with col2:
+        st_data = folium_static(mapa, width=800, height=700)
 
 
 
