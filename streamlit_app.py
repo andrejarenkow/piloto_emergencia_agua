@@ -144,8 +144,8 @@ with tab_producao:
         st_data = st_folium(m,
                             key="new",
                             feature_group_to_add=fg_eta,
-                            height=800,
-                            width=700,)
+                            height=1000,
+                            width=800,)
 
 
     with col1_:
