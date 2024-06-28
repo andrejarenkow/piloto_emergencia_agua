@@ -86,13 +86,14 @@ tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
 
 with tab_producao:
     col1_, col2_ = st.columns([1,1])
+    # Supondo que dados seja o DataFrame original
     df = dados.copy()
-
+    
     # Cria o mapa centralizado na média das coordenadas
     map_center = [-30, -52]
     m = folium.Map(location=map_center, zoom_start=7)
-
-        # Função para estilizar a área inundada
+    
+    # Função para estilizar a área inundada
     def estilo_area_inundada(feature):
         return {
             'fillColor': '#77b7f7',
@@ -108,25 +109,32 @@ with tab_producao:
         style_function=estilo_area_inundada
     ).add_to(m)
     
+    # Cria um FeatureGroup para cada tipo de ponto
+    fg_eta = folium.FeatureGroup(name="Ponto da ETA")
+    fg_captacao = folium.FeatureGroup(name="Ponto de Captação")
     
-    # Adicionar um controle de camadas
-    folium.LayerControl().add_to(m)
-    
-    # Adiciona os pontos do DataFrame no mapa
+    # Adiciona os pontos "Ponto da ETA" ao FeatureGroup correspondente
     for _, row in df.iterrows():
         folium.Marker(
             location=[row['Latitude ETA'], row['Longitude ETA']],
             popup=row['Nome da forma de abastecimento'],
-            color='green'
-        ).add_to(m)
-
-    # Adiciona os pontos do DataFrame no mapa
+            icon=folium.Icon(color='green')
+        ).add_to(fg_eta)
+    
+    # Adiciona os pontos "Ponto de Captação" ao FeatureGroup correspondente
     for _, row in df.iterrows():
         folium.Marker(
             location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
             popup=row['Nome da forma de abastecimento'],
-            icon=folium.Icon(color=row['cor'])
-        ).add_to(m)
+            icon=folium.Icon(color='blue')  # Alterar a cor conforme necessário
+        ).add_to(fg_captacao)
+    
+    # Adiciona os FeatureGroups ao mapa
+    fg_eta.add_to(m)
+    fg_captacao.add_to(m)
+    
+    # Adicionar um controle de camadas
+    folium.LayerControl().add_to(m)
 
     with col2_:
         st_data = folium_static(m, width=800, height=700)
