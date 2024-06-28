@@ -141,7 +141,7 @@ with tab_producao:
     folium.LayerControl().add_to(m)
 
     with col2_:
-        st_data = st_folium(m, width=800, height=700, returned_objects=[])
+        st_data = st_folium(m, width=800, height=700, returned_objects=["last_object_clicked"])
 
     with col1_:
         st.write(st_data)
