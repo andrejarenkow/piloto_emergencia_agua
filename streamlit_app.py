@@ -86,11 +86,15 @@ tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
 
 with tab_producao:
     col1_, col2_ = st.columns([1,1])
+
+    with col1_:
+        
+    
     # Supondo que dados seja o DataFrame original
     df = dados.copy()
     
     # Cria o mapa centralizado na média das coordenadas
-    map_center = [-30, -52]
+    map_center = [-31, -52]
     m = folium.Map(location=map_center, zoom_start=7)
     
     # Função para estilizar a área inundada
