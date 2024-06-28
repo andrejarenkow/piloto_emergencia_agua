@@ -116,8 +116,15 @@ with tab_producao:
         folium.Marker(
             location=[row['Latitude ETA'], row['Longitude ETA']],
             popup=row['Nome da forma de abastecimento'],
+            color='green'
         ).add_to(m)
-    
+
+    # Adiciona os pontos do DataFrame no mapa
+    for _, row in df.iterrows():
+        folium.Marker(
+            location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
+            popup=row['Nome da forma de abastecimento'],
+        ).add_to(m)
 
     with col2_:
         st_data = folium_static(m, width=800, height=700)
