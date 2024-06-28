@@ -84,6 +84,7 @@ gdf_pontos, gdf_area_inundada, dados = read_dados()
 tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
 
 with tab_producao:
+    col1_, col2_ = st.columns([1,1])
     df = dados.copy()
 
     # Cria o mapa centralizado na média das coordenadas
@@ -117,7 +118,8 @@ with tab_producao:
             popup=row['Nome da forma de abastecimento'],
         ).add_to(m)
 
-    st_data = folium_static(m, width=800, height=700)
+    with col2_:
+        st_data = folium_static(m, width=800, height=700)
 
 with tab_planejamento:
     col1, col2 = st.columns([1,1])
