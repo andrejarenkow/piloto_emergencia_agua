@@ -88,7 +88,7 @@ with tab_producao:
     df = dados.copy()
 
     # Cria o mapa centralizado na média das coordenadas
-    map_center = [df['Latitude ETA'].mean(), df['Longitude ETA'].mean()]
+    map_center = [-30, -52]
     m = folium.Map(location=map_center, zoom_start=7)
 
         # Função para estilizar a área inundada
@@ -114,9 +114,10 @@ with tab_producao:
     # Adiciona os pontos do DataFrame no mapa
     for _, row in df.iterrows():
         folium.Marker(
-            location=[-30, -52],
+            location=[row['Latitude ETA'], row['Longitude ETA']],
             popup=row['Nome da forma de abastecimento'],
         ).add_to(m)
+    
 
     with col2_:
         st_data = folium_static(m, width=800, height=700)
