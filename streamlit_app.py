@@ -165,7 +165,7 @@ with tab_planejamento:
     centro_mapa = [-30, -52]  # substitua pela latitude e longitude do centro do seu mapa
     
     # Criar o mapa
-    mapa = folium.Map(location=centro_mapa, zoom_start=7)
+    #mapa = folium.Map(location=centro_mapa, zoom_start=7)
     
     # Função para obter o ícone baseado na coluna 'Distância' e 'Tipo de ca'
     def get_icon(distancia, tipo_de_ca):
@@ -189,24 +189,24 @@ with tab_planejamento:
     superficial_layer = folium.FeatureGroup(name='Superficial')
     
     # Adicionar gdf_pontos ao mapa com ícones personalizados e grupos de camadas
-    for idx, row in gdf_pontos.iterrows():
-        marker = folium.Marker(
-            location=[row.geometry.centroid.y, row.geometry.centroid.x],
-            icon=get_icon(row['Distância'], row['Tipo de captação']),
-            tooltip=folium.Tooltip(
-                text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Nome: {row['Nome da Forma de Abastecimento']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
-            )
-        )
+    #for idx, row in gdf_pontos.iterrows():
+    #    marker = folium.Marker(
+    #        location=[row.geometry.centroid.y, row.geometry.centroid.x],
+    #        icon=get_icon(row['Distância'], row['Tipo de captação']),
+    #        tooltip=folium.Tooltip(
+    #            text=f"Distância: {row['Distância']}<br>Município: {row['Município']}<br>Nome: {row['Nome da Forma de Abastecimento']}<br>Tipo de Captação: {row['Tipo de captação']}<br>Tipo da Fonte: {row['Tipo da Forma de Abastecimento']}"
+    #        )
+    #    )
         
         # Adicionar o marcador à camada apropriada
-        if row['Tipo de captação'] == 'SUBTERRANEO':
-            marker.add_to(subterraneo_layer)
-        elif row['Tipo de captação'] == 'SUPERFICIAL':
-            marker.add_to(superficial_layer)
+    #    if row['Tipo de captação'] == 'SUBTERRANEO':
+    #        marker.add_to(subterraneo_layer)
+    #    elif row['Tipo de captação'] == 'SUPERFICIAL':
+    #        marker.add_to(superficial_layer)
     
     # Adicionar as camadas ao mapa
     #subterraneo_layer.add_to(mapa)
-    superficial_layer.add_to(mapa)
+    #superficial_layer.add_to(mapa)
     
     # Função para estilizar a área inundada
     def estilo_area_inundada(feature):
@@ -218,15 +218,15 @@ with tab_planejamento:
         }
     
     # Adicionar gdf_area_inundada ao mapa com estilo
-    folium.GeoJson(
-        gdf_area_inundada,
-        name='Área Inundada',
-        style_function=estilo_area_inundada
-    ).add_to(mapa)
+    #folium.GeoJson(
+    #    gdf_area_inundada,
+    #    name='Área Inundada',
+    #    style_function=estilo_area_inundada
+    #).add_to(mapa)
     
     
     # Adicionar um controle de camadas
-    folium.LayerControl().add_to(mapa)
+    #folium.LayerControl().add_to(mapa)
     
     
     # Exibir o mapa
