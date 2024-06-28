@@ -108,7 +108,7 @@ with tab_producao:
     
     
     # Adicionar um controle de camadas
-    folium.LayerControl().add_to(mapa)
+    folium.LayerControl().add_to(m)
     
     # Adiciona os pontos do DataFrame no mapa
     for _, row in df.iterrows():
