@@ -88,7 +88,27 @@ with tab_producao:
 
     # Cria o mapa centralizado na média das coordenadas
     map_center = [df['Latitude ETA'].mean(), df['Longitude ETA'].mean()]
-    m = folium.Map(location=map_center, zoom_start=10)
+    m = folium.Map(location=map_center, zoom_start=7)
+
+        # Função para estilizar a área inundada
+    def estilo_area_inundada(feature):
+        return {
+            'fillColor': '#77b7f7',
+            'color': '#77b7f7',
+            'weight': 1,
+            'fillOpacity': 0.6,
+        }
+    
+    # Adicionar gdf_area_inundada ao mapa com estilo
+    folium.GeoJson(
+        gdf_area_inundada,
+        name='Área Inundada',
+        style_function=estilo_area_inundada
+    ).add_to(m)
+    
+    
+    # Adicionar um controle de camadas
+    folium.LayerControl().add_to(mapa)
     
     # Adiciona os pontos do DataFrame no mapa
     for _, row in df.iterrows():
