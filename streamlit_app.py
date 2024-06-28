@@ -114,7 +114,7 @@ with tab_producao:
     # Adiciona os pontos do DataFrame no mapa
     for _, row in df.iterrows():
         folium.Marker(
-            location=[row['Latitude ETA'], row['Longitude ETA']],
+            location=[-30, -52],
             popup=row['Nome da forma de abastecimento'],
         ).add_to(m)
 
