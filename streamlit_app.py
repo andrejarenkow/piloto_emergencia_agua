@@ -198,14 +198,14 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     )
     
     # Adicionar o GeoJSON ao mapa
-    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(mapbox_style="dark")
     fig.update_layout(
         mapbox={
             'layers': [
                 {
                     'source': geojson,
                     'type': "line",
-                    #'color': 'blue'
+                    'color': 'blue'
                 }
             ]
         }
