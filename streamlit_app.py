@@ -150,6 +150,6 @@ with tab_producao:
 
 
     with col1_:
-        st.write(st_data)
+        st.write(st_data["last_object_clicked_popup"])
 
 
