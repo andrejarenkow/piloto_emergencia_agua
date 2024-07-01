@@ -194,7 +194,7 @@ with tab_planejamento:
         gdf_pontos,
         lat='lat',
         lon='lon',
-        #hover_name='name',
+        color='Distância',
         zoom=6,
         height=800
     )
