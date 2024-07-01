@@ -204,7 +204,7 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
             'layers': [
                 {
                     'source': geojson,
-                    #'type': "line",
+                    'type': "line",
                     #'color': 'blue'
                 }
             ]
