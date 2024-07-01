@@ -116,7 +116,7 @@ with tab_producao:
     
     # Cria um FeatureGroup para cada tipo de ponto
     fg_eta = folium.FeatureGroup(name="Ponto da ETA")
-    #fg_captacao = folium.FeatureGroup(name="Ponto de Captação")
+    fg_captacao = folium.FeatureGroup(name="Ponto de Captação")
     
     # Adiciona os pontos "Ponto da ETA" ao FeatureGroup correspondente
     for _, row in df.iterrows():
