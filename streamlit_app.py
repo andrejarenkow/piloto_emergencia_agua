@@ -195,7 +195,7 @@ with tab_planejamento:
         lat='lat',
         lon='lon',
         #hover_name='name',
-        zoom=5,
+        zoom=6,
         height=800
     )
     
