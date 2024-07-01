@@ -152,7 +152,7 @@ with tab_producao:
 
     with col1_:
         selecionado = st_data["last_object_clicked_popup"]
-        st.write(f'{selecionado}')
-        st.write(dicionario_pontos['Endereço da ETA'][selecionado])
+        st.write(f'Ponto selecionado: {selecionado}')
+        st.write(f'Endereço da ETA: {dicionario_pontos['Endereço da ETA'][selecionado]}')
 
 
