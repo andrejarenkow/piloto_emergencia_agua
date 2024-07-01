@@ -190,7 +190,7 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     
     fig = px.scatter_mapbox(
         gdf_pontos,
-        lat='Latitude_corrigida,
+        lat='Latitude_corrigida',
         lon='Latitude_corrigida',
         #hover_name='name',
         zoom=5,
