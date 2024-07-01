@@ -198,6 +198,9 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     )
     
     # Adicionar o GeoJSON ao mapa
+    # Configurar o token do Mapbox
+    token = 'pk.eyJ1IjoiYW5kcmUtamFyZW5rb3ciLCJhIjoiY2xkdzZ2eDdxMDRmMzN1bnV6MnlpNnNweSJ9.4_9fi6bcTxgy5mGaTmE4Pw'
+    px.set_mapbox_access_token(token)
     fig.update_layout(mapbox_style="dark")
     fig.update_layout(
         mapbox={
@@ -205,7 +208,7 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
                 {
                     'source': geojson,
                     'type': "line",
-                    'color': 'blue'
+                    'color': 'lightsteelblue'
                 }
             ]
         }
