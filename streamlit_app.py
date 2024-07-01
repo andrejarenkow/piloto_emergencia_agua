@@ -181,8 +181,8 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     # Verificar os tipos de geometria no GeoDataFrame
     st.write(gdf_pontos.geometry.type)
     # Extrair latitude e longitude das geometrias
-    gdf_pontos['lat'] = gdf_pontos.geometry.y
-    gdf_pontos['lon'] = gdf_pontos.geometry.x
+    gdf_pontos['lat'] = gdf_pontos.geometry..centroid.y
+    gdf_pontos['lon'] = gdf_pontos.geometry.centroid.x
     # Passo 2: Converter o GeoDataFrame em GeoJSON
     geojson = gdf_area_inundada.to_crs(epsg=4326).__geo_interface__
     # Passo 3: Criar o mapa scatter_mapbox usando Plotly Express
