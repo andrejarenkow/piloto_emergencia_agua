@@ -144,7 +144,7 @@ with tab_producao:
         st_data = st_folium(m,
                             key="new",
                             feature_group_to_add=fg_eta,
-                            height=800,
+                            height=600,
                             width=800,
                            returned_objects=["last_object_clicked_popup"])
 
