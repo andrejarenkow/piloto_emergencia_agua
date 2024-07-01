@@ -108,11 +108,11 @@ with tab_producao:
         }
     
     # Adicionar gdf_area_inundada ao mapa com estilo
-    #folium.GeoJson(
-    #    gdf_area_inundada,
-    #    name='Área Inundada',
-    #    style_function=estilo_area_inundada
-    #).add_to(m)
+    folium.GeoJson(
+        gdf_area_inundada,
+        name='Área Inundada',
+        style_function=estilo_area_inundada
+    ).add_to(m)
     
     # Cria um FeatureGroup para cada tipo de ponto
     fg_eta = folium.FeatureGroup(name="Ponto da ETA")
