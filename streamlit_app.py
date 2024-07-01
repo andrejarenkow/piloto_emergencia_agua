@@ -179,7 +179,8 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
             """
     )
     # Verificar os tipos de geometria no GeoDataFrame
-    st.write(gdf_pontos.geometry.type)
+    # Filtrar apenas geometrias do tipo Point
+    gdf_pontos = gdf_pontos[gdf_pontos.geometry.type == 'Point']
     # Extrair latitude e longitude das geometrias
     gdf_pontos['lat'] = gdf_pontos.geometry.centroid.y
     gdf_pontos['lon'] = gdf_pontos.geometry.centroid.x
