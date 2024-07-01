@@ -80,6 +80,7 @@ def read_dados(ttl=3600):
     return gdf_pontos, gdf_area_inundada, dados
 
 gdf_pontos, gdf_area_inundada, dados = read_dados()
+dicionario_pontos = dados.set_index('Nome da forma de abastecimento').to_dict()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 #st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
 tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
@@ -150,6 +151,8 @@ with tab_producao:
 
 
     with col1_:
-        st.write(st_data["last_object_clicked_popup"])
+        selecionado = st_data["last_object_clicked_popup"]
+        st.write(f'{selecionado}')
+        st.write(dicionario_pontos['Endereço da ETA'][selecionado])
 
 
