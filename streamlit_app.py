@@ -178,3 +178,37 @@ Em seguida, foi gerado um buffer de 500 metros ao redor de todos os pontos de ab
 tratando-os como pontos de alerta para futuros eventos climáticos extremos.
             """
     )
+    # Passo 2: Converter o GeoDataFrame em GeoJSON
+    geojson = gdf_area_inundada.to_crs(epsg=4326).__geo_interface__
+    # Passo 3: Criar o mapa scatter_mapbox usando Plotly Express
+    # Vamos adicionar alguns pontos de exemplo para ilustrar
+    data = [
+        {'lat': -30.0, 'lon': -51.0, 'name': 'Ponto 1'},
+        {'lat': -29.0, 'lon': -50.0, 'name': 'Ponto 2'}
+    ]
+    
+    fig = px.scatter_mapbox(
+        data,
+        lat='lat',
+        lon='lon',
+        hover_name='name',
+        zoom=6,
+        height=600
+    )
+    
+    # Adicionar o GeoJSON ao mapa
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(
+        mapbox={
+            'layers': [
+                {
+                    'source': geojson,
+                    'type': "line",
+                    'color': 'blue'
+                }
+            ]
+        }
+    )
+    
+    # Exibir o mapa
+    st.plotly_chart(fig)
