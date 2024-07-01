@@ -188,12 +188,12 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
     ]
     
     fig = px.scatter_mapbox(
-        data,
-        lat='lat',
-        lon='lon',
-        hover_name='name',
-        zoom=6,
-        height=600
+        gdf_pontos,
+        lat='Latitude_corrigida',
+        lon='Longitude_corrigida',
+        #hover_name='name',
+        zoom=5,
+        height=800
     )
     
     # Adicionar o GeoJSON ao mapa
@@ -203,8 +203,8 @@ tratando-os como pontos de alerta para futuros eventos climáticos extremos.
             'layers': [
                 {
                     'source': geojson,
-                    'type': "line",
-                    'color': 'blue'
+                    #'type': "line",
+                    #'color': 'blue'
                 }
             ]
         }
