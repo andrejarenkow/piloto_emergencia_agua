@@ -178,7 +178,8 @@ Em seguida, foi gerado um buffer de 500 metros ao redor de todos os pontos de ab
 tratando-os como pontos de alerta para futuros eventos climáticos extremos.
             """
     )
-    gdf_pontos = pd.DataFrame(gdf_pontos)
+    #gdf_pontos = pd.DataFrame(gdf_pontos)
+    gdf_pontos['geometry'] = gdf_pontos['geometry'].apply(lambda x: x.wkt)
     # Passo 2: Converter o GeoDataFrame em GeoJSON
     geojson = gdf_area_inundada.to_crs(epsg=4326).__geo_interface__
     # Passo 3: Criar o mapa scatter_mapbox usando Plotly Express
