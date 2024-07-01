@@ -153,6 +153,10 @@ with tab_producao:
     with col1_:
         selecionado = st_data["last_object_clicked_popup"]
         st.write(f'Ponto selecionado: {selecionado}')
-        st.write(f"Endereço da ETA: {dicionario_pontos['Endereço da ETA'][selecionado]}")
+        st.write(f"Município: {dicionario_pontos['Município'][selecionado]}")
+        st.write(f"Regional de Saúde: {dicionario_pontos['CRS'][selecionado]}")
+        st.write(f"Instituição responsável: {dicionario_pontos['Instituição responsável'][selecionado]}")
+        st.write(f"Código SISAGUA: {dicionario_pontos['Código da forma de abastecimento SISAGUA'][selecionado]}")
+        
 
 
