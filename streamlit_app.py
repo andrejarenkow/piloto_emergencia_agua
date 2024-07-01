@@ -154,7 +154,7 @@ with tab_producao:
         selecionado = st_data["last_object_clicked_popup"]
 
         try:
-            st.write(f'Ponto selecionado: {selecionado}')
+            st.write(f"Ponto selecionado: {dicionario_pontos['Nome da forma de abastecimento'][selecionado]}")
             st.write(f"Município: {dicionario_pontos['Município'][selecionado]}")
             st.write(f"Regional de Saúde: {dicionario_pontos['CRS'][selecionado]}")
             st.write(f"Instituição responsável: {dicionario_pontos['Instituição responsável'][selecionado]}")
