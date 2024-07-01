@@ -127,16 +127,16 @@ with tab_producao:
         ).add_to(fg_eta)
     
     # Adiciona os pontos "Ponto de Captação" ao FeatureGroup correspondente
-    #for _, row in df.iterrows():
-    #    folium.Marker(
-    #        location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
-    #        popup=row['Nome da forma de abastecimento'],
-    #        icon=folium.Icon(color='blue')  # Alterar a cor conforme necessário
-    #    ).add_to(fg_captacao)
+    for _, row in df.iterrows():
+        folium.Marker(
+            location=[row['Latitude ponto captação'], row['Longitude ponto captação']],
+            popup=row['Nome da forma de abastecimento'],
+            icon=folium.Icon(color='blue')  # Alterar a cor conforme necessário
+        ).add_to(fg_captacao)
     
     # Adiciona os FeatureGroups ao mapa
-    #fg_eta.add_to(m)
-    #fg_captacao.add_to(m)
+    fg_eta.add_to(m)
+    fg_captacao.add_to(m)
     
     # Adicionar um controle de camadas
     folium.LayerControl().add_to(m)
@@ -154,6 +154,7 @@ with tab_producao:
         selecionado = st_data["last_object_clicked_popup"]
 
         if (selecionado) != None:
+            
             st.write(f"Ponto selecionado: {selecionado}")
             st.write(f"Município: {dicionario_pontos['Município'][selecionado]}")
             st.write(f"Regional de Saúde: {dicionario_pontos['CRS'][selecionado]}")
