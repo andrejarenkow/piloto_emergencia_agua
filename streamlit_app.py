@@ -151,6 +151,7 @@ with tab_producao:
 
 
     with col1_:
+        st.metric('Total de pontos', len(df))
         selecionado = st_data["last_object_clicked_popup"]
 
         if (selecionado) != None:
