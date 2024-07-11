@@ -167,7 +167,7 @@ with tab_producao:
         ETA_escolhida = selecionado
         
         # Filtrando os dados para a ETA escolhida
-        eta = dados[dados['Nome da forma de abastecimento'] == ETA_escolhida].reset_index(drop=True)
+        eta = dados_coletas[dados_coletas['Nome da forma de abastecimento'] == ETA_escolhida].reset_index(drop=True)
         
         # Convertendo a coluna "Data da Coleta" para datetime, se ainda não estiver
         eta['Data da Coleta'] = pd.to_datetime(eta['Data da Coleta'], errors='coerce')
