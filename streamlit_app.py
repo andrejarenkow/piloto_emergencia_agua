@@ -25,7 +25,17 @@ col1.image('https://github.com/andrejarenkow/csv/blob/master/logo_estado%20(3)%2
 
 # Lê os dados de um arquivo Excel online
 @st.cache_data
-def read_dados(ttl=3600):
+def read_dados(ttl=50):
+
+    dados_coletas = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
+                      sheet_name='ID das amostras')
+
+    dados_coletas = dados_coletas[dados_coletas['Tipo de amostra'] != 'branco de ácido'].reset_index(drop=True)
+
+    # completar valores foward fill
+    for i in ['Semana de coleta', 'CRS', 'Município', 'Nome da forma de abastecimento']:
+      dados_coletas[i].fillna(method='ffill', inplace=True)
+      
 
     dados = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
                       sheet_name='Pontos de coleta')
@@ -77,9 +87,9 @@ def read_dados(ttl=3600):
     #dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(corrigir_coordenada)
     #dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(corrigir_coordenada)
 
-    return gdf_pontos, gdf_area_inundada, dados
+    return gdf_pontos, gdf_area_inundada, dados, dados_coletas
 
-gdf_pontos, gdf_area_inundada, dados = read_dados()
+gdf_pontos, gdf_area_inundada, dados, dados_coletas = read_dados()
 dicionario_pontos = dados.set_index('Nome da forma de abastecimento').to_dict()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 #st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
@@ -153,6 +163,22 @@ with tab_producao:
     with col1_:
         st.metric('Total de pontos', len(df))
         selecionado = st_data["last_object_clicked_popup"]
+        # Supondo que 'dados' é o seu DataFrame
+        ETA_escolhida = selecionado
+        
+        # Filtrando os dados para a ETA escolhida
+        eta = dados[dados['Nome da forma de abastecimento'] == ETA_escolhida].reset_index(drop=True)
+        
+        # Convertendo a coluna "Data da Coleta" para datetime, se ainda não estiver
+        eta['Data da Coleta'] = pd.to_datetime(eta['Data da Coleta'], errors='coerce')
+        
+        # Extraindo datas únicas e convertendo para o formato desejado
+        datas_unicas = eta['Data da Coleta'].dropna().dt.strftime('%d/%m/%Y').unique()
+        
+        # Convertendo a lista de datas únicas para uma string separada por vírgulas
+        datas_formatadas = ', '.join(datas_unicas)
+        
+        print(f'Datas da coleta da {ETA_escolhida}: {datas_formatadas}')
 
         if (selecionado) != None:
             
@@ -162,6 +188,7 @@ with tab_producao:
             st.write(f"Manancial: {dicionario_pontos['Nome do manancial'][selecionado]}")
             st.write(f"Instituição responsável: {dicionario_pontos['Instituição responsável'][selecionado]}")
             st.write(f"Código SISAGUA: {dicionario_pontos['Código da forma de abastecimento SISAGUA'][selecionado]}")
+            st.write(f'Datas da coleta da {ETA_escolhida}: {datas_formatadas}')
 
         else:
             st.write('Selecione um ponto no mapa')
