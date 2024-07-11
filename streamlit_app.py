@@ -188,7 +188,7 @@ with tab_producao:
             st.write(f"Manancial: {dicionario_pontos['Nome do manancial'][selecionado]}")
             st.write(f"Instituição responsável: {dicionario_pontos['Instituição responsável'][selecionado]}")
             st.write(f"Código SISAGUA: {dicionario_pontos['Código da forma de abastecimento SISAGUA'][selecionado]}")
-            st.write(f'Datas da coleta da {ETA_escolhida}: {datas_formatadas}')
+            st.write(f'Datas da coleta: {datas_formatadas}')
 
         else:
             st.write('Selecione um ponto no mapa')
