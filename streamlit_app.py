@@ -27,6 +27,9 @@ col1.image('https://github.com/andrejarenkow/csv/blob/master/logo_estado%20(3)%2
 @st.cache_data
 def read_dados(ttl=50):
 
+    dados_resultados = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
+                      sheet_name='Resultados')
+    
     dados_coletas = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
                       sheet_name='ID das amostras')
 
@@ -87,9 +90,9 @@ def read_dados(ttl=50):
     #dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(corrigir_coordenada)
     #dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(corrigir_coordenada)
 
-    return gdf_pontos, gdf_area_inundada, dados, dados_coletas
+    return gdf_pontos, gdf_area_inundada, dados, dados_coletas, dados_resultados
 
-gdf_pontos, gdf_area_inundada, dados, dados_coletas = read_dados()
+gdf_pontos, gdf_area_inundada, dados, dados_coletas, dados_resultados = read_dados()
 dicionario_pontos = dados.set_index('Nome da forma de abastecimento').to_dict()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 #st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
