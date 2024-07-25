@@ -96,7 +96,7 @@ gdf_pontos, gdf_area_inundada, dados, dados_coletas, dados_resultados = read_dad
 dicionario_pontos = dados.set_index('Nome da forma de abastecimento').to_dict()
 #gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
 #st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
-tab_producao, tab_planejamento = st.tabs(['Pontos escolhidos','Planejamento'])
+tab_resultados, tab_producao, tab_planejamento = st.tabs(['Resultados','Pontos escolhidos','Planejamento'])
 
 with tab_producao:
     col1_, col2_ = st.columns([1,1])
