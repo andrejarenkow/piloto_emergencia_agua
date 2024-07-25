@@ -360,6 +360,23 @@ with tab_resultados:
         
         # Inicializa o mapa centrado em uma localização média
         mapa = folium.Map(location=[-30.5, -53.5], zoom_start=7)
+
+        # Adiciona a camada OpenStreetMap
+        folium.TileLayer(
+            tiles='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            attr='OpenStreetMap',
+            name='OpenStreetMap'
+        ).add_to(mapa)
+        
+        # Adiciona a camada de satélite
+        folium.TileLayer(
+            tiles='https://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png',
+            attr='Stamen Terrain',
+            name='Satélite'
+        ).add_to(mapa)
+
+        # Adiciona uma camada de controle para alternar entre as camadas
+        folium.LayerControl().add_to(mapa)
         
         # Adiciona pontos ao mapa
         for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
