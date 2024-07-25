@@ -317,5 +317,10 @@ with tab_resultados:
             opacity=0.3,
             layer="below",  # Colocar o retângulo atrás dos dados
             line_width=0
-        ) 
+        )
+        # Remover as linhas de grade
+        fig.update_layout(
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=False)
+        )
         st.plotly_chart(fig)
