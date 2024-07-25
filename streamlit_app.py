@@ -101,7 +101,7 @@ def read_dados(ttl=50):
     dados_resultados['VMP'] = dados_resultados['Ensaio'].map(dados_vmp)
     
     # Criar do indicador de acordo com o VMP
-    dados_resultados['Indicador'] = dados_resultados['Resultado numerico (mg/L)']/dados_resultados['VMP']
+    dados_resultados['Indicador'] = round(dados_resultados['Resultado numerico (mg/L)']/dados_resultados['VMP'],2)
     
     # Merge com a tabela dados
     dados_resultados = dados_resultados.merge(dados_coletas, on='ID da Amostra', how='left')
