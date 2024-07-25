@@ -325,6 +325,7 @@ with tab_resultados:
         )
         st.plotly_chart(fig)
 
+    with coluna_mapa:
         # Parâmetro selecionado
         parametro_selecionado = 'Ferro'
         
