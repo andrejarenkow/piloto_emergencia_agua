@@ -371,7 +371,7 @@ with tab_resultados:
 
         # Adiciona a camada Stadia.AlidadeSatellite
         folium.TileLayer(
-            tiles='https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}'',
+            tiles='https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}',
             attr='Stadia Maps',
             name='Alidade Satellite'
         ).add_to(mapa)
