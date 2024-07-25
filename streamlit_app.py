@@ -327,7 +327,7 @@ with tab_resultados:
 
     with coluna_mapa:
         # Parâmetro selecionado
-        parametro_selecionado = 'Ferro'
+        parametro_selecionado = st.selectbox('Parâmetro', options=sorted(dados_resultados['Ensaio'].unique()))
         
         # Filtrar os dados com base no parâmetro selecionado
         dados_resultados_mapa = dados_resultados[dados_resultados['Ensaio'] == parametro_selecionado].reset_index(drop=True)
