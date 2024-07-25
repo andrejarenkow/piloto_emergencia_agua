@@ -358,13 +358,13 @@ with tab_resultados:
             popup_html = f"""
             <div style="width: 200px;">
                 <strong>Município:</strong> {row['Município']}<br>
-                <strong>Nome da forma de abastecimento:</strong> {row['Nome da forma de abastecimento']}<br>
+                <strong>Forma de abastecimento:</strong> {row['Nome da forma de abastecimento']}<br>
                 <strong>Tipo de amostra:</strong> {row['Tipo de amostra']}<br>
                 <strong>Resultado (mg/L):</strong> {row['Resultado (mg/L)']}<br>
                 <strong>Indicador:</strong> {row['Indicador']}
             </div>
             """
-            iframe = IFrame(html=popup_html, width=300, height=100)
+            iframe = IFrame(html=popup_html, width=300, height=300)
             popup = folium.Popup(iframe, max_width=300)
         
             folium.CircleMarker(
