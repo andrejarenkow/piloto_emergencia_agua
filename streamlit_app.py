@@ -343,9 +343,9 @@ with tab_resultados:
         
         # Cria novas colunas de latitude e longitude com base no 'Tipo de Amostra'
         dados_resultados_mapa['Latitude'] = dados_resultados_mapa.apply(
-            lambda row: row['Latitude ETA'] if row['Tipo de Amostra'] == 'Tratada' else row['Latitude ponto captação'], axis=1)
+            lambda row: row['Latitude ETA'] if row['Tipo de Amostra'] == 'Bruta' else row['Latitude ponto captação'], axis=1)
         dados_resultados_mapa['Longitude'] = dados_resultados_mapa.apply(
-            lambda row: row['Longitude ETA'] if row['Tipo de Amostra'] == 'Bruta' else row['Longitude ponto captação'], axis=1)
+            lambda row: row['Longitude ETA'] if row['Tipo de Amostra'] == 'tratada' else row['Longitude ponto captação'], axis=1)
         
         # Função para determinar a cor com base no valor do Indicador
         def get_color(indicador):
