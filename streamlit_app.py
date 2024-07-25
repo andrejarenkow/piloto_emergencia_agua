@@ -368,11 +368,12 @@ with tab_resultados:
             name='OpenStreetMap'
         ).add_to(mapa)
         
-        # Adiciona a camada de satélite
+
+        # Adiciona a camada Stadia.AlidadeSatellite
         folium.TileLayer(
-            tiles='https://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png',
-            attr='Stamen Terrain',
-            name='Satélite'
+            tiles='https://tiles.stadiamaps.com/tiles/alidade_satelite/{z}/{x}/{y}.png',
+            attr='Stadia Maps',
+            name='Alidade Satellite'
         ).add_to(mapa)
 
         # Adiciona uma camada de controle para alternar entre as camadas
