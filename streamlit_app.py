@@ -356,7 +356,7 @@ with tab_resultados:
         # Adiciona pontos ao mapa
         for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
             popup_html = f"""
-            <div style="width: 300px;">
+            <div style="width: 400px;">
                 <strong>Município:</strong> {row['Município']}<br>
                 <strong>Forma de abastecimento:</strong> {row['Nome da forma de abastecimento']}<br>
                 <strong>Tipo de amostra:</strong> {row['Tipo de amostra']}<br>
@@ -364,8 +364,8 @@ with tab_resultados:
                 <strong>Indicador:</strong> {row['Indicador']}
             </div>
             """
-            iframe = IFrame(html=popup_html, width=300, height=170)
-            popup = folium.Popup(iframe, max_width=300)
+            iframe = IFrame(html=popup_html, width=400, height=150)
+            popup = folium.Popup(iframe, max_width=400)
         
             folium.CircleMarker(
                 location=[row['Latitude'], row['Longitude']],
