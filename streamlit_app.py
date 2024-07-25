@@ -357,7 +357,10 @@ with tab_resultados:
         for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
             popup_html = f"""
             <div style="width: 200px;">
-                <strong>Conclusão:</strong> {row['Conclusão']}<br>
+                <strong>Município:</strong> {row['Município']}<br>
+                <strong>Nome da forma de abastecimento:</strong> {row['Nome da forma de abastecimento']}<br>
+                <strong>Tipo de amostra:</strong> {row['Tipo de amostra']}<br>
+                <strong>Resultado (mg/L):</strong> {row['Resultado (mg/L)']}<br>
                 <strong>Indicador:</strong> {row['Indicador']}
             </div>
             """
