@@ -26,21 +26,19 @@ col1.image('https://github.com/andrejarenkow/csv/blob/master/logo_estado%20(3)%2
 # Lê os dados de um arquivo Excel online
 @st.cache_data
 def read_dados(ttl=50):
+    link_planilha = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx'
 
-    dados_resultados = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
-                      sheet_name='Resultados')
+    dados_vmp = pd.read_excel(link_planilha, sheet_name='VMP')
+    dados_vmp = dados_vmp.set_index('Parâmetro').to_dict()['VMP']
     
-    dados_coletas = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
-                      sheet_name='ID das amostras')
-
+    dados_coletas = pd.read_excel(link_planilha, sheet_name='ID das amostras')
     dados_coletas = dados_coletas[dados_coletas['Tipo de amostra'] != 'branco de ácido'].reset_index(drop=True)
 
     # completar valores foward fill
     for i in ['Semana de coleta', 'CRS', 'Município', 'Nome da forma de abastecimento']:
       dados_coletas[i].fillna(method='ffill', inplace=True)
       
-
-    dados = pd.read_excel('https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx',
+    dados = pd.read_excel(link_planilha,
                       sheet_name='Pontos de coleta')
 
     dados = dados.dropna(subset=['Latitude ETA']).reset_index(drop=True)
@@ -49,7 +47,6 @@ def read_dados(ttl=50):
     #Pontos avaliados pela Babi dentro da mancha de inundação
     gdf_pontos_dentro = gpd.read_file('shapefiles/pontos_dentro_show.gpkg', encoding='utf-8').set_crs(epsg=4326)
     gdf_pontos_dentro['Distância'] = 'Alagado'
-
 
     #Pontos avaliados pela Babi a 500 metros da mancha de inundação
     gdf_pontos_500_metros = gpd.read_file('shapefiles/pontos_500_e_mergulhadores_denovo.gpkg', encoding='utf-8' ).set_crs(epsg=4326, allow_override=True)
@@ -85,24 +82,43 @@ def read_dados(ttl=50):
         numero_consertado = -1 * numero_transformado / (10 ** log_arredondado)
         
         return numero_consertado
-    
-    # Aplicar a função à coluna 'Valores'
-    #dados_function['Latitude_corrigida'] = dados_function['Latitude_corrigida'].apply(corrigir_coordenada)
-    #dados_function['Longitude_corrigida'] = dados_function['Longitude_corrigida'].apply(corrigir_coordenada)
 
+    dados_resultados = pd.read_excel(link_planilha, sheet_name='Resultados')
+    # Função para definir o valor da nova coluna
+    def determinar_tipo(id_amostra):
+        if id_amostra.endswith('BT'):
+            return 'Bruta'
+        elif id_amostra.endswith('TR'):
+            return 'Tratada'
+        else:
+            return 'Indefinido'
+    
+    # Aplicar a função para criar a nova coluna condicional
+    dados_resultados['Tipo de Amostra'] = dados_resultados['ID da Amostra'].apply(determinar_tipo)
+    
+    # Criar coluna VMP
+    dados_resultados['VMP'] = dados_resultados['Ensaio'].map(dados_vmp)
+    
+    # Criar do indicador de acordo com o VMP
+    dados_resultados['Indicador'] = dados_resultados['Resultado numerico (mg/L)']/dados_resultados['VMP']
+    
+    # Merge com a tabela dados
+    dados_resultados = dados_resultados.merge(dados_coletas, on='ID da Amostra', how='left')
+    dados_resultados = dados_resultados.merge(dados, on='Nome da forma de abastecimento', how='left')
+
+    # Alterar o formato da data DD/MM/AAAA com strftime
+    dados_resultados['Data da Coleta'] = dados_resultados['Data da Coleta'].dt.strftime('%d/%m/%Y')
+    
     return gdf_pontos, gdf_area_inundada, dados, dados_coletas, dados_resultados
 
 gdf_pontos, gdf_area_inundada, dados, dados_coletas, dados_resultados = read_dados()
 dicionario_pontos = dados.set_index('Nome da forma de abastecimento').to_dict()
-#gdf_pontos = pd.concat( [gdf_pontos_500_metros, gdf_pontos_dentro], ignore_index=True)
-#st.title('Formas de abastecimento de água geolocalizadas e área inundada RS, maio 2024')
+
+# Criação das abas
 tab_resultados, tab_producao, tab_planejamento = st.tabs(['Resultados','Pontos escolhidos','Planejamento'])
 
 with tab_producao:
-    col1_, col2_ = st.columns([1,1])
-
-    #with col1_:
-        
+    col1_, col2_ = st.columns([1,1])      
     
     # Supondo que dados seja o DataFrame original
     df = dados.copy()
