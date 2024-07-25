@@ -360,7 +360,7 @@ with tab_resultados:
                 color=get_color(row['Indicador']),
                 fill=True,
                 fill_opacity=0.7,
-                popup=f"Município: {row['Município']}\nForma abastecimento: {row['Nome da forma de abastecimento']}\nConclusão: {row['Conclusão']}\nResultado: {row['Resultado (mg/L)']\nIndicador: {row['Indicador']}"
+                popup=f"Município: {row['Município']}\nForma abastecimento: {row['Nome da forma de abastecimento']}\nConclusão: {row['Conclusão']}\nResultado: {row['Resultado (mg/L)']}\nIndicador: {row['Indicador']}"
             ).add_to(mapa)
         
         # Salva o mapa em um arquivo HTML
