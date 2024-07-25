@@ -115,7 +115,7 @@ gdf_pontos, gdf_area_inundada, dados, dados_coletas, dados_resultados = read_dad
 dicionario_pontos = dados.set_index('Nome da forma de abastecimento').to_dict()
 
 # Criação das abas
-tab_resultados, tab_producao, tab_planejamento = st.tabs(['Resultados','Pontos escolhidos','Planejamento'])
+tab_producao,tab_resultados, tab_planejamento = st.tabs(['Resultados','Pontos escolhidos','Metodologia'])
 
 with tab_producao:
     col1_, col2_ = st.columns([1,1])      
@@ -360,7 +360,7 @@ with tab_resultados:
                 color=get_color(row['Indicador']),
                 fill=True,
                 fill_opacity=0.7,
-                popup=f"Município: {row['Município']}\nForma abastecimento: {row['Nome da forma de abastecimento']}\nConclusão: {row['Conclusão']}\nResultado: {row['Resultado (mg/L)']}\nIndicador: {row['Indicador']}"
+                popup=f"Município: {row['Município']}\nForma abastecimento: {row['Nome da forma de abastecimento']}\Tipo de água: {row['Tipo de Amostra']}\nConclusão: {row['Conclusão']}\nResultado: {row['Resultado (mg/L)']}\nIndicador: {row['Indicador']}"
             ).add_to(mapa)
         
         # Salva o mapa em um arquivo HTML
