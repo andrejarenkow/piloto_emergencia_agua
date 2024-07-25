@@ -364,8 +364,8 @@ with tab_resultados:
                 <strong>Indicador:</strong> {row['Indicador']}
             </div>
             """
-            iframe = IFrame(html=popup_html, width=400, height=150)
-            popup = folium.Popup(iframe, max_width=400)
+            iframe = IFrame(html=popup_html, width=450, height=150)
+            popup = folium.Popup(iframe, max_width=450)
         
             folium.CircleMarker(
                 location=[row['Latitude'], row['Longitude']],
