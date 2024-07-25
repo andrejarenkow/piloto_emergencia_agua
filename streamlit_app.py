@@ -292,7 +292,7 @@ with tab_resultados:
             y0=0.5, y1=0.5,
             line=dict(color='Orange', dash='dash')
         )
-         fig.add_shape(
+        fig.add_shape(
             type='line',
             x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # x0 e x1 abrangem todas as categorias de 'Ensaio'
             y0=0.25, y1=0.25,
