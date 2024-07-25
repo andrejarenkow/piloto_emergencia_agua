@@ -266,3 +266,14 @@ with tab_planejamento:
     # Exibir o mapa
     with col2:
         st.plotly_chart(fig)
+
+with tab_resultados:
+    fig = px.strip(dados_resultados, x="Ensaio", y="Indicador", color='Tipo de Amostra',
+               hover_name = 'Nome da forma de abastecimento', 
+               hover_data = [
+                   'Município',
+                   'Tipo de Amostra',
+                   'Conclusão',
+                   'Data da Coleta',
+                             ])
+    st.plotly_chart(fig)
