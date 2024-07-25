@@ -273,8 +273,8 @@ with tab_resultados:
     with coluna_grafico:
         # Define a paleta de cores
         color_map = {
-            'Tratada': 'lightskyblue',  # Defina as cores desejadas para 'Tratada'
-            'Bruta': 'slategray'    # Defina as cores desejadas para 'Bruta'
+            'Tratada': 'royalblue',  # Defina as cores desejadas para 'Tratada'
+            'Bruta': 'darkslategray'    # Defina as cores desejadas para 'Bruta'
         }
         fig = px.strip(dados_resultados.sort_values('Ensaio'), x="Ensaio", y="Indicador", color='Tipo de Amostra',
                        title = 'Resultados relativos ao VMP',
