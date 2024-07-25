@@ -270,7 +270,7 @@ with tab_planejamento:
 with tab_resultados:
     coluna_grafico, coluna_mapa = st.columns(2)
     with coluna_grafico:
-        fig = px.strip(dados_resultados.sort_values('Indicador'), x="Ensaio", y="Indicador", color='Tipo de Amostra',
+        fig = px.strip(dados_resultados, x="Ensaio", y="Indicador", color='Tipo de Amostra',
                        title = 'Resultados relativos ao VMP',
                        hover_name = 'Nome da forma de abastecimento', 
                        hover_data = [
