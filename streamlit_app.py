@@ -361,20 +361,11 @@ with tab_resultados:
         # Inicializa o mapa centrado em uma localização média
         mapa = folium.Map(location=[-30.5, -53.5], zoom_start=7)
 
-        # Adiciona a camada OpenStreetMap
+        # Adiciona a camada Esri_WorldImagery
         folium.TileLayer(
-            tiles='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            attr='OpenStreetMap',
-            name='OpenStreetMap'
-        ).add_to(mapa)
-        
-
-        # Adiciona a camada Stadia_AlidadeSatellite com as configurações fornecidas
-        folium.TileLayer(
-            tiles='https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}',
-            attr='&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            ext='jpg',
-            name='Stadia Alidade Satellite'
+            tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            attr='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+            name='Esri World Imagery'
         ).add_to(mapa)
 
         # Adiciona uma camada de controle para alternar entre as camadas
