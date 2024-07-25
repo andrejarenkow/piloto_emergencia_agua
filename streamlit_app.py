@@ -10,6 +10,7 @@ import folium
 import geopandas as gpd
 from folium.features import GeoJsonTooltip
 from streamlit_folium import st_folium, folium_static
+from folium import IFrame
 
 st.set_page_config(
     page_title="Vigiagua Emergência",
