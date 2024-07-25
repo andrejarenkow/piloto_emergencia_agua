@@ -279,4 +279,29 @@ with tab_resultados:
                            'Conclusão',
                            'Data da Coleta',
                                      ])
+        # Adicionar uma linha horizontal no valor y=1
+        fig.add_shape(
+            type='line',
+            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # x0 e x1 abrangem todas as categorias de 'Ensaio'
+            y0=1, y1=1,
+            line=dict(color='Red', dash='dash')
+        )
+        
+        # Atualizar o layout para garantir que a linha seja visível
+        fig.update_layout(
+            shapes=[{
+                'type': 'line',
+                'x0': -0.5,
+                'x1': len(dados_resultados['Ensaio'].unique()) - 0.5,
+                'y0': 1,
+                'y1': 1,
+                'line': {
+                    'color': 'Red',
+                    'width': 2,
+                    'dash': 'dash',
+                },
+            }],
+        )
+
+        
         st.plotly_chart(fig)
