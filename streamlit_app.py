@@ -115,7 +115,7 @@ gdf_pontos, gdf_area_inundada, dados, dados_coletas, dados_resultados = read_dad
 dicionario_pontos = dados.set_index('Nome da forma de abastecimento').to_dict()
 
 # Criação das abas
-tab_producao,tab_resultados, tab_planejamento = st.tabs(['Resultados','Pontos escolhidos','Metodologia'])
+tab_producao, tab_resultados, tab_planejamento = st.tabs(['Pontos escolhidos','Resultados','Metodologia'])
 
 with tab_producao:
     col1_, col2_ = st.columns([1,1])      
