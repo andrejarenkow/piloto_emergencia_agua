@@ -279,25 +279,43 @@ with tab_resultados:
                            'Conclusão',
                            'Data da Coleta',
                                      ])
-        # Adicionar uma linha horizontal no valor y=1
-        fig.add_shape(
-            type='line',
-            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # x0 e x1 abrangem todas as categorias de 'Ensaio'
-            y0=1, y1=1,
-            line=dict(color='Red', dash='dash')
-        )
-        fig.add_shape(
-            type='line',
-            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # x0 e x1 abrangem todas as categorias de 'Ensaio'
-            y0=0.5, y1=0.5,
-            line=dict(color='Orange', dash='dash')
-        )
-        fig.add_shape(
-            type='line',
-            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # x0 e x1 abrangem todas as categorias de 'Ensaio'
-            y0=0.25, y1=0.25,
-            line=dict(color='Gold', dash='dash')
-        ) 
 
+        # Adicionar um retângulo para pintar o fundo
+        fig.add_shape(
+            type="rect",
+            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # Abranger todas as categorias de 'Ensaio'
+            y0=0, y1=0.5,  # Definir os limites verticais do retângulo
+            fillcolor="forestgreen",
+            opacity=0.3,
+            layer="below",  # Colocar o retângulo atrás dos dados
+            line_width=0
+        )
         
+        fig.add_shape(
+            type="rect",
+            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # Abranger todas as categorias de 'Ensaio'
+            y0=0.5, y1=0.75,  # Definir os limites verticais do retângulo
+            fillcolor="Gold",
+            opacity=0.3,
+            layer="below",  # Colocar o retângulo atrás dos dados
+            line_width=0
+        )
+        fig.add_shape(
+            type="rect",
+            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # Abranger todas as categorias de 'Ensaio'
+            y0=0.75, y1=1,  # Definir os limites verticais do retângulo
+            fillcolor="Orange",
+            opacity=0.3,
+            layer="below",  # Colocar o retângulo atrás dos dados
+            line_width=0
+        )
+        fig.add_shape(
+            type="rect",
+            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # Abranger todas as categorias de 'Ensaio'
+            y0=1, y1=999,  # Definir os limites verticais do retângulo
+            fillcolor="Red",
+            opacity=0.3,
+            layer="below",  # Colocar o retângulo atrás dos dados
+            line_width=0
+        ) 
         st.plotly_chart(fig)
