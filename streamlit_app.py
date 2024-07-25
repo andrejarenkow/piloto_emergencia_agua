@@ -312,7 +312,7 @@ with tab_resultados:
         fig.add_shape(
             type="rect",
             x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # Abranger todas as categorias de 'Ensaio'
-            y0=1, y1=dados_resultados['Indicador'].max(),  # Definir os limites verticais do retângulo
+            y0=1, y1=dados_resultados['Indicador'].max()*1.2,  # Definir os limites verticais do retângulo
             fillcolor="Red",
             opacity=0.3,
             layer="below",  # Colocar o retângulo atrás dos dados
