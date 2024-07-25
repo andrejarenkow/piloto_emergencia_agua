@@ -324,3 +324,43 @@ with tab_resultados:
             yaxis=dict(showgrid=False)
         )
         st.plotly_chart(fig)
+
+        # Parâmetro selecionado
+        parametro_selecionado = 'Ferro'
+        
+        # Filtrar os dados com base no parâmetro selecionado
+        dados_resultados_mapa = dados_resultados[dados_resultados['Ensaio'] == parametro_selecionado].reset_index(drop=True)
+        
+        # Cria novas colunas de latitude e longitude com base no 'Tipo de Amostra'
+        dados_resultados_mapa['Latitude'] = dados_resultados_mapa.apply(
+            lambda row: row['Latitude ETA'] if row['Tipo de Amostra'] == 'Tratada' else row['Latitude ponto captação'], axis=1)
+        dados_resultados_mapa['Longitude'] = dados_resultados_mapa.apply(
+            lambda row: row['Longitude ETA'] if row['Tipo de Amostra'] == 'Bruta' else row['Longitude ponto captação'], axis=1)
+        
+        # Função para determinar a cor com base no valor do Indicador
+        def get_color(indicador):
+            if 0 <= indicador <= 0.5:
+                return 'forestgreen'
+            elif 0.5 < indicador <= 0.75:
+                return 'gold'
+            elif 0.75 < indicador <= 1:
+                return 'orange'
+            else:
+                return 'red'
+        
+        # Inicializa o mapa centrado em uma localização média
+        mapa = folium.Map(location=[-32, -51], zoom_start=8)
+        
+        # Adiciona pontos ao mapa
+        for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
+            folium.CircleMarker(
+                location=[row['Latitude'], row['Longitude']],
+                radius=4,  # Ajusta o tamanho do marcador conforme necessário
+                color=get_color(row['Indicador']),
+                fill=True,
+                fill_opacity=0.7,
+                popup=f"Conclusão: {row['Conclusão']}\nIndicador: {row['Indicador']}"
+            ).add_to(mapa)
+        
+        # Salva o mapa em um arquivo HTML
+        st_folium(mapa, width=725, returned_objects=[])
