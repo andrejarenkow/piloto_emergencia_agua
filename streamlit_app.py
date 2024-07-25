@@ -369,11 +369,12 @@ with tab_resultados:
         ).add_to(mapa)
         
 
-        # Adiciona a camada Stadia.AlidadeSatellite
+        # Adiciona a camada Stadia_AlidadeSatellite com as configurações fornecidas
         folium.TileLayer(
-            tiles='https://{s}.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg',
+            tiles='https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}',
             attr='&copy; CNES, Distribution Airbus DS, © Airbus DS, © PlanetObserver (Contains Copernicus Data) | &copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            name='Alidade Satellite'
+            ext='jpg',
+            name='Stadia Alidade Satellite'
         ).add_to(mapa)
 
         # Adiciona uma camada de controle para alternar entre as camadas
