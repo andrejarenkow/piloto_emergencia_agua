@@ -269,11 +269,12 @@ with tab_planejamento:
 
 with tab_resultados:
     fig = px.strip(dados_resultados, x="Ensaio", y="Indicador", color='Tipo de Amostra',
-               hover_name = 'Nome da forma de abastecimento', 
-               hover_data = [
-                   'Município',
-                   'Tipo de Amostra',
-                   'Conclusão',
-                   'Data da Coleta',
-                             ])
+                   title = 'Resultados relativos ao VMP',
+                   hover_name = 'Nome da forma de abastecimento', 
+                   hover_data = [
+                       'Município',
+                       'Tipo de Amostra',
+                       'Conclusão',
+                       'Data da Coleta',
+                                 ])
     st.plotly_chart(fig)
