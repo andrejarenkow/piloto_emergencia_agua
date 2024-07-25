@@ -286,22 +286,18 @@ with tab_resultados:
             y0=1, y1=1,
             line=dict(color='Red', dash='dash')
         )
-        
-        # Atualizar o layout para garantir que a linha seja visível
-        fig.update_layout(
-            shapes=[{
-                'type': 'line',
-                'x0': -0.5,
-                'x1': len(dados_resultados['Ensaio'].unique()) - 0.5,
-                'y0': 1,
-                'y1': 1,
-                'line': {
-                    'color': 'Red',
-                    'width': 2,
-                    'dash': 'dash',
-                },
-            }],
+        fig.add_shape(
+            type='line',
+            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # x0 e x1 abrangem todas as categorias de 'Ensaio'
+            y0=0.5, y1=0.5,
+            line=dict(color='Orange', dash='dash')
         )
+         fig.add_shape(
+            type='line',
+            x0=-0.5, x1=len(dados_resultados['Ensaio'].unique()) - 0.5,  # x0 e x1 abrangem todas as categorias de 'Ensaio'
+            y0=0.25, y1=0.25,
+            line=dict(color='Yellow', dash='dash')
+        ) 
 
         
         st.plotly_chart(fig)
