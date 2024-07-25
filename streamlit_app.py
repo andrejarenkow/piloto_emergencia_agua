@@ -271,8 +271,14 @@ with tab_planejamento:
 with tab_resultados:
     coluna_grafico, coluna_mapa = st.columns(2)
     with coluna_grafico:
+        # Define a paleta de cores
+        color_map = {
+            'Tratada': 'blue',  # Defina as cores desejadas para 'Tratada'
+            'Bruta': 'black'    # Defina as cores desejadas para 'Bruta'
+        }
         fig = px.strip(dados_resultados.sort_values('Ensaio'), x="Ensaio", y="Indicador", color='Tipo de Amostra',
                        title = 'Resultados relativos ao VMP',
+                       color_discrete_map=color_map,
                        hover_name = 'Nome da forma de abastecimento', 
                        hover_data = [
                            'Município',
@@ -322,7 +328,9 @@ with tab_resultados:
         # Remover as linhas de grade
         fig.update_layout(
             xaxis=dict(showgrid=False),
-            yaxis=dict(showgrid=False)
+            yaxis=dict(showgrid=False),
+            xaxis_title='Parâmetro',  # Substitua pelo título desejado para o eixo X
+            yaxis_title='Indicador (Resultado/VMP)',  # Substitua pelo título desejado para o eixo Y
         )
         st.plotly_chart(fig)
 
