@@ -354,13 +354,22 @@ with tab_resultados:
         
         # Adiciona pontos ao mapa
         for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
+            popup_html = f"""
+            <div style="width: 200px;">
+                <strong>Conclusão:</strong> {row['Conclusão']}<br>
+                <strong>Indicador:</strong> {row['Indicador']}
+            </div>
+            """
+            iframe = IFrame(html=popup_html, width=200, height=100)
+            popup = folium.Popup(iframe, max_width=200)
+        
             folium.CircleMarker(
                 location=[row['Latitude'], row['Longitude']],
-                radius=4,  # Ajusta o tamanho do marcador conforme necessário
+                radius=5,  # Ajusta o tamanho do marcador conforme necessário
                 color=get_color(row['Indicador']),
                 fill=True,
                 fill_opacity=0.7,
-                popup=f"Município: {row['Município']}\nForma abastecimento: {row['Nome da forma de abastecimento']}\Tipo de água: {row['Tipo de Amostra']}\nConclusão: {row['Conclusão']}\nResultado: {row['Resultado (mg/L)']}\nIndicador: {row['Indicador']}"
+                popup=popup
             ).add_to(mapa)
         
         # Salva o mapa em um arquivo HTML
