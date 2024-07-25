@@ -350,7 +350,7 @@ with tab_resultados:
                 return 'red'
         
         # Inicializa o mapa centrado em uma localização média
-        mapa = folium.Map(location=[-30, -53], zoom_start=7)
+        mapa = folium.Map(location=[-30, -52.5], zoom_start=7)
         
         # Adiciona pontos ao mapa
         for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
