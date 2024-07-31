@@ -185,9 +185,11 @@ Com base nessa normalização, os resultados são classificados em quatro faixas
 
 Essas faixas ajudam a interpretar a qualidade da água com base nos limites estabelecidos pela legislação, facilitando a identificação rápida de possíveis problemas.
     """
-    st.markdown(texto_metodologia)
+    
     coluna_grafico, coluna_mapa = st.columns(2)
     with coluna_grafico:
+        # Texto explicativo
+        st.markdown(texto_metodologia)
         # Define a paleta de cores
         color_map = {
             'Tratada': 'royalblue',  # Defina as cores desejadas para 'Tratada'
