@@ -172,6 +172,20 @@ with tab_planejamento:
         st.plotly_chart(fig)
 
 with tab_resultados:
+    texto_metodologia = """
+Para a construção do gráfico a seguir, os resultados obtidos nas análises foram divididos pelo Valor Máximo Permitido
+estabelecido pela legislação vigente (Portaria GM/MS 888/21 para água tratada e Conama XXX para água bruta). Esse procedimento visa normalizar os dados.
+
+Com base nessa normalização, os resultados são classificados em quatro faixas distintas:
+
+* 0 a 0,5: Nível seguro
+* 0,5 a 0,75: Sinal de alerta
+* 0,75 a 1: Perigo
+* Acima de 1: Água imprópria
+
+Essas faixas ajudam a interpretar a qualidade da água com base nos limites estabelecidos pela legislação, facilitando a identificação rápida de possíveis problemas.
+    """
+    st.markdown(texto_metodologia)
     coluna_grafico, coluna_mapa = st.columns(2)
     with coluna_grafico:
         # Define a paleta de cores
