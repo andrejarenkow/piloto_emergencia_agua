@@ -262,6 +262,13 @@ Essas faixas ajudam a interpretar a qualidade da água com base nos limites esta
             yaxis=dict(showgrid=False),
             xaxis_title='Parâmetro',  # Substitua pelo título desejado para o eixo X
             yaxis_title='Indicador (Resultado/VMP)',  # Substitua pelo título desejado para o eixo Y
+            legend=dict( #alterar posição da legenda
+                        orientation="h",
+                        yanchor="bottom",
+                        y=1.02,
+                        xanchor="right",
+                        x=1
+                        )
         )
         st.plotly_chart(fig)
 
