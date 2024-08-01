@@ -29,8 +29,7 @@ col1.image('https://github.com/andrejarenkow/csv/blob/master/logo_estado%20(3)%2
 def read_dados(ttl=50):
     link_planilha = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQkzpN-gUEQdxaWa6WI1UsI3DGvILGZRTnKogYn5k-KgW5eBzpv36pJJut73U7FjGeZjPuZeBA2p30u/pub?output=xlsx'
 
-    dados_vmp = pd.read_excel(link_planilha, sheet_name='VMP')
-    dados_vmp = dados_vmp.set_index('Parâmetro').to_dict()['VMP']
+
     
     dados_coletas = pd.read_excel(link_planilha, sheet_name='ID das amostras')
     dados_coletas = dados_coletas[dados_coletas['Tipo de amostra'] != 'branco de ácido'].reset_index(drop=True)
@@ -96,10 +95,23 @@ def read_dados(ttl=50):
     
     # Aplicar a função para criar a nova coluna condicional
     dados_resultados['Tipo de Amostra'] = dados_resultados['ID da Amostra'].apply(determinar_tipo)
-    
-    # Criar coluna VMP
-    dados_resultados['VMP'] = dados_resultados['Ensaio'].map(dados_vmp)
-    
+
+    # Planilha VMP
+    dados_vmp = pd.read_excel(link_planilha, sheet_name='VMP')
+    dados_vmp_bruta = dados_vmp[dados_vmp['Tipo']=='Bruta'].set_index('Parâmetro').to_dict()['VMP']
+    dados_vmp_tratada = dados_vmp[dados_vmp['Tipo']=='Tratada'].set_index('Parâmetro').to_dict()['VMP']
+
+    # Função para aplicar a lógica desejada
+    def map_vmp(row):
+        if row['Tipo de Amostra'] == 'Bruta':
+            return dados_vmp_bruta.get(row['Ensaio'], None)
+        elif row['Tipo de Amostra'] == 'Tratada':
+            return dados_vmp_tratada.get(row['Ensaio'], None)
+        return None
+
+    # Aplicar a função para criar a nova coluna VMP
+    dados_resultados['VMP'] = dados_resultados.apply(map_vmp, axis=1)
+        
     # Criar do indicador de acordo com o VMP
     dados_resultados['Indicador'] = round(dados_resultados['Resultado numerico (mg/L)']/dados_resultados['VMP'],2)
     
@@ -174,7 +186,7 @@ with tab_planejamento:
 with tab_resultados:
     texto_metodologia = """
 Para a construção do gráfico a seguir, os resultados obtidos nas análises foram divididos pelo Valor Máximo Permitido
-estabelecido pela legislação vigente (Portaria GM/MS 888/21 para água tratada e Conama XXX para água bruta). Esse procedimento visa normalizar os dados.
+estabelecido pela legislação vigente (Portaria GM/MS 888/21 para água tratada e Conama 357 de 2005 para água bruta). Esse procedimento visa normalizar os dados.
 
 Com base nessa normalização, os resultados são classificados em quatro faixas distintas:
 
