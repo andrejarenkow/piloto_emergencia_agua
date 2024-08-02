@@ -145,7 +145,7 @@ with tab_planejamento:
         )
         imagens1, imagens2 = st.columns(2)
         imagens1.image('20240712101815_IMG_6883.jpg', width=300)
-        imagens2.image('20240712101815_IMG_6883.jpg', width=300)
+        imagens2.image('20240712102202_IMG_6905.jpg', width=300)
     # Verificar os tipos de geometria no GeoDataFrame
     # Filtrar apenas geometrias do tipo Point
     #gdf_pontos = gdf_pontos[gdf_pontos.geometry.type == 'Point']
