@@ -143,7 +143,7 @@ with tab_planejamento:
     tratando-os como pontos de alerta para futuros eventos climáticos extremos.
                 """
         )
-        st.image('20240712101815_IMG_6883.jpg')
+        st.image('20240712101815_IMG_6883.jpg', width=300)
     # Verificar os tipos de geometria no GeoDataFrame
     # Filtrar apenas geometrias do tipo Point
     #gdf_pontos = gdf_pontos[gdf_pontos.geometry.type == 'Point']
