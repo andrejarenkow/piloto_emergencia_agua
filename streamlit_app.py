@@ -315,26 +315,29 @@ Essas faixas ajudam a interpretar a qualidade da água com base nos limites esta
         
         # Adiciona pontos ao mapa
         for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
-            popup_html = f"""
-            <div style="width: 400px;">
-                <strong>Município:</strong> {row['Município']}<br>
-                <strong>Forma de abastecimento:</strong> {row['Nome da forma de abastecimento']}<br>
-                <strong>Tipo de amostra:</strong> {row['Tipo de amostra']}<br>
-                <strong>Resultado (mg/L):</strong> {row['Resultado (mg/L)']}<br>
-                <strong>Indicador:</strong> {row['Indicador']}
-            </div>
-            """
-            iframe = IFrame(html=popup_html, width=430, height=120)
-            popup = folium.Popup(iframe, max_width=430)
-        
-            folium.CircleMarker(
-                location=[row['Latitude'], row['Longitude']],
-                radius=5,  # Ajusta o tamanho do marcador conforme necessário
-                color=get_color(row['Indicador']),
-                fill=True,
-                fill_opacity=0.7,
-                popup=popup
-            ).add_to(mapa)
+            try:
+                popup_html = f"""
+                <div style="width: 400px;">
+                    <strong>Município:</strong> {row['Município']}<br>
+                    <strong>Forma de abastecimento:</strong> {row['Nome da forma de abastecimento']}<br>
+                    <strong>Tipo de amostra:</strong> {row['Tipo de amostra']}<br>
+                    <strong>Resultado (mg/L):</strong> {row['Resultado (mg/L)']}<br>
+                    <strong>Indicador:</strong> {row['Indicador']}
+                </div>
+                """
+                iframe = IFrame(html=popup_html, width=430, height=120)
+                popup = folium.Popup(iframe, max_width=430)
+                
+                folium.CircleMarker(
+                    location=[row['Latitude'], row['Longitude']],
+                    radius=5,  # Ajusta o tamanho do marcador conforme necessário
+                    color=get_color(row['Indicador']),
+                    fill=True,
+                    fill_opacity=0.7,
+                    popup=popup
+                ).add_to(mapa)
+            except:
+                pass
         
         # Salva o mapa em um arquivo HTML
         st_folium(mapa, width=725, returned_objects=[])
