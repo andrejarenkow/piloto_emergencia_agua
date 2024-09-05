@@ -35,7 +35,7 @@ def read_dados(ttl=50):
     dados_coletas = dados_coletas[dados_coletas['Tipo de amostra'] != 'branco de ácido'].reset_index(drop=True)
 
     # completar valores foward fill
-    for i in ['Semana de coleta', 'CRS', 'Município', 'Nome da forma de abastecimento']:
+    for i in ['CRS', 'Município', 'Nome da forma de abastecimento']:
       dados_coletas[i].fillna(method='ffill', inplace=True)
       
     dados = pd.read_excel(link_planilha,
