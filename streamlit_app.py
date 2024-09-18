@@ -211,7 +211,8 @@ Essas faixas ajudam a interpretar a qualidade da água com base nos limites esta
             'Tratada': 'royalblue',  # Defina as cores desejadas para 'Tratada'
             'Bruta': 'darkslategray'    # Defina as cores desejadas para 'Bruta'
         }
-        fig = px.strip(dados_resultados.sort_values('Ensaio'), x="Ensaio", y="Indicador", color='Tipo de Amostra',
+        dados_resultados_tratada = dados_resultados[dados_resultados['Tipo de Amostra']=='Tratada']
+        fig = px.strip(dados_resultados_tratada.sort_values('Ensaio'), x="Ensaio", y="Indicador", color='Tipo de Amostra',
                        title = 'Resultados relativos ao VMP',
                        color_discrete_map=color_map,
                        hover_name = 'Nome da forma de abastecimento', 
