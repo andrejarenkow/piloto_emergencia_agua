@@ -305,14 +305,14 @@ Essas faixas ajudam a interpretar a qualidade da água com base nos limites esta
         mapa = folium.Map(location=[-30.5, -53.5], zoom_start=7)
 
         # Adiciona a camada Esri_WorldImagery
-        folium.TileLayer(
-            tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-            attr='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-            name='Esri World Imagery'
-        ).add_to(mapa)
+        #folium.TileLayer(
+        #    tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        #    attr='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+        #    name='Esri World Imagery'
+        #).add_to(mapa)
 
         # Adiciona uma camada de controle para alternar entre as camadas
-        folium.LayerControl().add_to(mapa)
+        #folium.LayerControl().add_to(mapa)
         
         # Adiciona pontos ao mapa
         for _, row in dados_resultados_mapa.dropna(subset=['Indicador']).iterrows():
